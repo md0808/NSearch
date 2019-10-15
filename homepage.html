@@ -12,6 +12,7 @@
     <link type="text/css" rel ="stylesheet" href="./assets/css/homepage.css">
 </head>
 <body>
+
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
         <li><a href="#!">Movies</a></li>
@@ -25,6 +26,8 @@
           <img class="brand-logo" src="./assets/images/NSearch_LOGO_White.png" />
 
           <ul class="right hide-on-med-and-down">
+            <li><i class="small material-icons">whatshot</i>
+            </li>
             <!-- Dropdown Trigger -->
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Categories<i class="material-icons right">arrow_drop_down</i></a></li>
           </ul>
@@ -44,6 +47,7 @@
                 <div class="card-content white-text">
                   <span class="card-title"></span>
                   <p>This is why I like this thing and I think you should like it too.</p>
+                  
                 </div>
                 <div class="card-action">
                  <a href="#"><i class="tiny material-icons">favorite
@@ -54,15 +58,21 @@
                 </div>
               </div>
                             <!-- Modal Trigger -->
-                <a class="waves-effect waves-light btn modal-trigger indigo lighten-2" id="makeAPost-btn" href="#modal1">Make a Post</a>
-                <!-- <button data-target="modal1" class="btn modal-trigger indigo lighten-2">Modal</button> -->
-
-
+     
                 <!-- Modal Structure -->
                 <div id="modal1" class="modal indigo">
                     <div class="modal-content">
                     <h4>Leave a Comment</h4>
                     <p>A bunch of text</p>
+                    <div class="input-field col s12">
+                        <select>
+                          <option value="" disabled selected>Choose your option</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select>
+                        <label>Materialize Select</label>
+                      </div>
                     </div>
                     <div class="modal-footer">
                     <a href="#!" class="modal-close waves-effect waves-indigo btn-flat">Agree</a>
@@ -70,7 +80,33 @@
                 </div>
             </div>
           </div>
+         
+
  </div>
+ <div class="fixed-action-bnt">
+    <a class="waves-effect waves-light btn-floating modal-trigger red" href="#modal1" id="makeAPost-btn"> 
+      <i class="small material-icons">add</i>
+    </a>
+    <ul>
+        <a class="waves-effect waves-light btn-floating yellow darken-2" id="book-post">
+          <i class="small material-icons">local_library</i>
+        </a>
+
+
+        <a class="waves-effect waves-light btn-floating green" id="movie-post"> 
+          <i class="small material-icons">movie</i></a>
+
+
+        <a class="waves-effect waves-light btn-floating  blue" id="music-post"> 
+          <i class="small material-icons">music_note</i></a>
+
+  
+        <a class="waves-effect waves-light btn-floating indigo" id="videogame-post"> 
+          <i class="small material-icons">keyboard</i></a>
+      </ul>
+ 
+ </div>
+
  </body>  
               
 
