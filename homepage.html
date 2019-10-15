@@ -153,19 +153,19 @@
                   <h5 for="first_name">Title</h5>
                   I am NSearch of:
                   <div class="input-field inline">
-                    <input id="email_inline" placeholder="Ex: A New Game To Play" type="email" class="validate">
+                    <input id="post-title" placeholder="Ex: A New Game To Play" type="email" class="validate">
                   </div>
                 </div>
 
                 <div class="input-field col s12">
                   <h5 for="textarea1" class="center-align">Post:</h5>
-                  <textarea rows="20" cols="50"></textarea>
+                  <textarea id="post-content" rows="20" cols="50"></textarea>
                 </div>
               </div>
           </div>
           <div class="modal-footer">
               <button href="#!" class="modal-close waves-effect waves-green btn-flat indigo">Cancel</button>
-              <button href="#!" class="modal-close waves-effect waves-green btn-flat indigo">Create</button>
+              <button type="button" href="#!" class="modal-close waves-effect waves-green btn-flat indigo" onclick="createNewPost()">Create</button>
           </div>
         </div>
       </div>
@@ -190,6 +190,14 @@
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-analytics.js"></script>
+
 <!-- music js file -->
 <script src="assets/javascript/music.js"></script>
 <!-- gaming js file -->
