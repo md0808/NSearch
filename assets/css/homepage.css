@@ -63,5 +63,14 @@ nav{
 
 }
 
+.modal{
+    overflow: auto;
+}
+
+.btn-flat{
+    color: white;
+}
+
+
 
 
