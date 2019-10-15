@@ -31,6 +31,9 @@ nav{
 #nav-links {
     padding-top: 16px;
 }
+.category-name {
+    font-weight: bolder;
+}
 
 #modal-button {
     position: fixed;
@@ -41,6 +44,7 @@ nav{
 
 .card {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .card-header a:link {
@@ -49,8 +53,15 @@ nav{
     font-weight: bolder;
 }
 .card-header a:visited{
-    color: #ffee58;
+    color :#FFAB40;
     line-height: 30px;
     font-weight: bolder;
     
 }
+.card-action{
+    color: #FFAB40;
+
+}
+
+
+
