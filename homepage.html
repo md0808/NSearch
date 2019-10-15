@@ -1,12 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+     <link type="text/css" rel ="stylesheet" href="./assets/css/homepage.css">
+  
+            
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>NSearch</title>
 </head>
 <body>
+
+
     
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!">Movies</a></li>
+        <li><a href="#!">Books</a></li>
+        <li><a href="#!">Music</a></li>
+        <li><a href="#!">Video Games</a></li>
+      </ul>
+      <nav>
+        <div class="nav-wrapper indigo darken-4">
+          <a href="#!" class="brand-logo">NSearch</a>
+          <ul class="right hide-on-med-and-down">
+
+            <!-- Dropdown Trigger -->
+            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Categories<i class="material-icons right">arrow_drop_down</i></a></li>
+          </ul>
+        </div>
+      </nav>
+
+    <div class="nav-wrapper indigo lighten-1" id="category-div">
+        <h6 id ="category-name">Category Name goes here</h6>
+    </div>
+              
+
+
+<div class="container">
+      <div class="row">
+            <div class="col s12 m6 offset-s1 offset-m3">
+              <div class="card indigo darken-1">
+                <div class="card-content white-text">
+                  <span class="card-title"></span>
+                  <p>This is why I like this thing and I think you should like it too.</p>
+                </div>
+                <div class="card-action">
+                 <a href="#"><i class="tiny material-icons">favorite
+                </i></a>
+                  <a href="#">Reply </a>
+                  <a href="#">View Replies </a>
+               
+                </div>
+              </div>
+                            <!-- Modal Trigger -->
+                <a class="waves-effect waves-light btn modal-trigger indigo lighten-2" href="#modal1">Make a Post</a>
+                <button data-target="modal1" class="btn modal-trigger indigo lighten-2">Modal</button>
+
+
+                <!-- Modal Structure -->
+                <div id="modal1" class="modal indigo">
+                    <div class="modal-content">
+                    <h4>Leave a Comment</h4>
+                    <p>A bunch of text</p>
+                    </div>
+                    <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-indigo btn-flat">Agree</a>
+                    </div>
+                </div>
+          
+
+            </div>
+
+          </div>
+          <div></div>
+          
+
+ </div>
+
+
+    
+              
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+ <script src="./assets/javascript/javascript.js"></script>
 </body>
 </html>

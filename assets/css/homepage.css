@@ -1,0 +1,14 @@
+.card{
+    margin: 0, auto;
+    align-self: center;
+}
+
+#category-div{
+    min-height: 50px;
+    z-index: -4;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+h6 {
+    color: white;
+}
