@@ -4,5 +4,5 @@ $( document ).ready(function() {
 
 $("#makeAPost-btn").on("click", function(){
     console.log ("post btn clicked");
-    $(".modal").modal();
+    $("#createAPost-Modal").modal();
 })

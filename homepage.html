@@ -1,160 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>NSearch</title>
-  
-     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link type="text/css" rel ="stylesheet" href="./assets/css/homepage.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>NSearch</title>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link type="text/css" rel="stylesheet" href="./assets/css/homepage.css">
 </head>
+
 <body>
 
 
 
-<!-- Dropdown Structure -->
-<ul id="dropdown1" class="dropdown-content">
-        <li><a href="#!" class="indigo-text">Movies</a></li>
-        <li><a href="#!" class="indigo-text">Books</a></li>
-        <li><a href="#!" class="indigo-text">Music</a></li>
-        <li><a href="#!" class="indigo-text">Video Games</a></li>
+  <!-- Dropdown Structure -->
+  <ul id="dropdown1" class="dropdown-content">
+    <li><a href="#!" class="indigo-text">Movies</a></li>
+    <li><a href="#!" class="indigo-text">Books</a></li>
+    <li><a href="#!" class="indigo-text">Music</a></li>
+    <li><a href="#!" class="indigo-text">Video Games</a></li>
+  </ul>
+  <nav>
+    <div class="nav-wrapper indigo darken-4 main-header">
+      <!-- <a href="#!" class="brand-logo">NSearch</a> -->
+      <img class="brand-logo" src="./assets/images/NSearch_LOGO_White.png" />
+
+      <ul class="right hide-on-med-and-down" id="nav-links">
+        <li><a href="#!"><i id="whats-hot-btn" class="medium material-icons">whatshot</i></a>
+        </li>
+        <!-- Dropdown Trigger -->
+        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Categories<i
+              class="material-icons right">arrow_drop_down</i></a></li>
       </ul>
-      <nav>
-        <div class="nav-wrapper indigo darken-4 main-header">
-          <!-- <a href="#!" class="brand-logo">NSearch</a> -->
-          <img class="brand-logo" src="./assets/images/NSearch_LOGO_White.png" />
-
-          <ul class="right hide-on-med-and-down" id="nav-links">
-            <li><a href="#!"><i id="whats-hot-btn" class="medium material-icons">whatshot</i></a>
-            </li>
-            <!-- Dropdown Trigger -->
-            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Categories<i class="material-icons right">arrow_drop_down</i></a></li>
-          </ul>
-        </div>
-      </nav>
-
-
-    <div class="nav-wrapper indigo lighten-1 center-align" id="category-name-div">
-        <h6 id="category-name">Category Name goes here</h6>
     </div>
-              
+  </nav>
 
 
-    <div class="container">
-          <div class="row">
-                <div class="col s12 m8 offset-s0 offset-m2">
-                  <!-- This is where all the activity around MOVIES will go. Hidden until click -->
-                  <div id="movies-activity-div" class="category-activity-div"></div>
-                  <!-- This is where all the activity around BOOKS will go. Hidden until click -->
-                  <div id="books-activity-div" class="category-activity-div"></div>
-                  <!-- This is where all the activity around MUSIC will go. Hidden until click -->
-                  <div id="music-activity-div" class="category-activity-div"></div>
-                  <!-- This is where all the activity around VIDEO GAMES will go. Hidden until click -->
-                  <div id="videogames-activity-div" class="category-activity-div"></div>
-                  <!-- This is where WHATS HOT will go. Hidden until click -->
-                  <div id="whatshot-activity-div" class="category-activity-div"></div>
-
-
-            
-                  <div class="card indigo darken-1">
-                      <div class="card-content white-text">
-                          <div class="card-header">
-                            <a href="#"><span>KingAlex123</span></a></br>
-                            <a href="#"><span>VideoGames</span></a>
-                            <hr>
-                          </div>
-                          <span class="card-title"> <h5 class="center-align">Title</h5></span> 
-                          <p>This is why I like this thing and I think you should like it too. Here is some more text
-                            about why I think it is so great. 
-                          </p>                         
-                      </div>
-                      <div class="card-action">
-                        <span class="num-favories">55</span> &nbsp; <a href="#"><i class="tiny material-icons">favorite
-                        </i></a>
-                          <a href="#">Reply </a>
-                          <a href="#" class="view-replies">View Replies </a>
-                      </div>
-                          <div class="replies card-content white-text">
-                              <div class="card-header">
-                                <a href="#"><span>KingAlex123</span></a></br>
-                              </div>
-                              <p>This is what a reply would look like once shown.
-                              </p>                         
-                          </div>
-                          <div class="card-action">
-                            <span class="num-favories">1</span> &nbsp; <a href="#" ><i class="tiny material-icons">favorite
-                            </i></a>
-                            <a href="#" class="reply">Reply</a>
-                          </div>
-                  </div>
-
-                  <div class="card indigo darken-1">
-                      <div class="card-content white-text">
-                          <div class="card-header">
-                            <a href="#"><span>JanzenIsaac123</span></a></br>
-                            <a href="#"><span>VideoGames</span></a>
-                            <hr>
-                          </div>
-                          <span class="card-title"> <h5 class="center-align">Title</h5></span> 
-                          <p>This is why I like this thing and I think you should like it too. Here is some more text
-                            about why I think it is so great. The replies are hidden here
-                          </p>                         
-                      </div>
-                      <div class="card-action">
-                        <span class="num-favories">32</span> &nbsp; <a href="#"><i class="tiny material-icons">favorite
-                        </i></a>
-                          <a href="#" class="reply">Reply </a>
-                          <a href="#" class="view-replies">View Replies </a>
-                      </div>
-                          
-                  </div>
+  <div class="nav-wrapper indigo lighten-1 center-align" id="category-name-div">
+    <h6 id="category-name">Category Name goes here</h6>
+  </div>
 
 
 
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m8 offset-s0 offset-m2">
+        <!-- This is where all the activity around MOVIES will go. Hidden until click -->
+        <div id="movies-activity-div" class="category-activity-div"></div>
+        <!-- This is where all the activity around BOOKS will go. Hidden until click -->
+        <div id="books-activity-div" class="category-activity-div"></div>
+        <!-- This is where all the activity around MUSIC will go. Hidden until click -->
+        <div id="music-activity-div" class="category-activity-div"></div>
+        <!-- This is where all the activity around VIDEO GAMES will go. Hidden until click -->
+        <div id="videogames-activity-div" class="category-activity-div"></div>
+        <!-- This is where WHATS HOT will go. Hidden until click -->
+        <div id="whatshot-activity-div" class="category-activity-div"></div>
+
+
+
+        <div class="card indigo darken-1">
+          <div class="card-content white-text">
+            <div class="card-header">
+              <a href="#"><span>KingAlex123</span></a></br>
+              <a href="#"><span>VideoGames</span></a>
+              <hr>
             </div>
-            
-
-                            <!-- Modal Trigger -->
-     
-                <!-- Modal Structure -->
-                <div id="modal1" class="modal indigo">
-                    <div class="modal-content">
-                    <h4>Leave a Comment</h4>
-                    <p>A bunch of text</p>
-                    <div class="input-field col s12">
-                        <select>
-                          <!-- <option value="" disabled selected>Choose your option</option>
-                          <option value="1">Option 1</option>
-                          <option value="2">Option 2</option>
-                          <option value="3">Option 3</option> -->
-                        </select>
-                        <label>Materialize Select</label>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-indigo btn-flat">Agree</a>
-                    </div>
-                </div>
+            <span class="card-title">
+              <h5 class="center-align">Title</h5>
+            </span>
+            <p>This is why I like this thing and I think you should like it too. Here is some more text
+              about why I think it is so great.
+            </p>
+          </div>
+          <div class="card-action">
+            <span class="num-favories">55</span> &nbsp; <a href="#"><i class="tiny material-icons">favorite
+              </i></a>
+            <a href="#">Reply </a>
+            <a href="#" class="view-replies">View Replies </a>
+          </div>
+          <div class="replies card-content white-text">
+            <div class="card-header">
+              <a href="#"><span>KingAlex123</span></a></br>
             </div>
+            <p>This is what a reply would look like once shown.
+            </p>
+          </div>
+          <div class="card-action">
+            <span class="num-favories">1</span> &nbsp; <a href="#"><i class="tiny material-icons">favorite
+              </i></a>
+            <a href="#" class="reply">Reply</a>
+          </div>
+        </div>
+
+        <div class="card indigo darken-1">
+          <div class="card-content white-text">
+            <div class="card-header">
+              <a href="#"><span>JanzenIsaac123</span></a></br>
+              <a href="#"><span>VideoGames</span></a>
+              <hr>
+            </div>
+            <span class="card-title">
+              <h5 class="center-align">Title</h5>
+            </span>
+            <p>This is why I like this thing and I think you should like it too. Here is some more text
+              about why I think it is so great. The replies are hidden here
+            </p>
+          </div>
+          <div class="card-action">
+            <span class="num-favories">32</span> &nbsp; <a href="#"><i class="tiny material-icons">favorite
+              </i></a>
+            <a href="#" class="reply">Reply </a>
+            <a href="#" class="view-replies">View Replies </a>
           </div>
 
+        </div>
 
 
 
- 
-      </div> <!--Container-->
+      </div>
 
 
- <div id="modal-button">
-    <a class="btn-floating waves-effect waves-red modal-trigger red right" href="#modal1" id="makeAPost-btn"> 
+      <!-- Modal Trigger -->
+
+      <!-- Modal Structure -->
+      <div id="createAPost-Modal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h4 class="center-align">Create A New Post</h4>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s6">
+                  <input placeholder="Ex: Cpt_Splunky" id="post-username" type="text" class="validate">
+                  <label for="first_name">Username</label>
+                </div>
+                <div class="input-field col s6">
+                  <div class="input-field col s12 m6">
+
+                    <!-- THIS IS WHAT ISNT WORKING...-->
+                    <select>
+                      <option>Test</option>
+                    </select>
+                    <label>Select Post Category</label>
+                  </div>
+                </div>
+
+                <div class="input-field col s12 center-align">
+                  <hr>
+                  <h5 for="first_name">Title</h5>
+                  I am NSearch of:
+                  <div class="input-field inline">
+                    <input id="email_inline" placeholder="Ex: A New Game To Play" type="email" class="validate">
+                  </div>
+                </div>
+
+                <div class="input-field col s12">
+                  <h5 for="textarea1" class="center-align">Post:</h5>
+                  <textarea rows="20" cols="50"></textarea>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button href="#!" class="modal-close waves-effect waves-green btn-flat indigo">Cancel</button>
+              <button href="#!" class="modal-close waves-effect waves-green btn-flat indigo">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+  <!--Container-->
+
+
+  <div id="modal-button">
+    <a class="btn-floating waves-effect waves-red modal-trigger red right" href="#createAPost-Modal" id="makeAPost-btn">
       <i class="small material-icons">add</i></a>
   </div>
 
- </body>  
-              
+</body>
+
 
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -166,4 +197,5 @@
 <!-- reading js file -->
 <script src="assets/javascript/reading.js"></script>
 <script src="assets/javascript/homepage.js"></script>
+
 </html>
