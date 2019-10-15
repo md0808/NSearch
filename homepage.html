@@ -13,20 +13,22 @@
 </head>
 <body>
 
+
+
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
-        <li><a href="#!">Movies</a></li>
-        <li><a href="#!">Books</a></li>
-        <li><a href="#!">Music</a></li>
-        <li><a href="#!">Video Games</a></li>
+        <li><a href="#!" class="indigo-text">Movies</a></li>
+        <li><a href="#!" class="indigo-text">Books</a></li>
+        <li><a href="#!" class="indigo-text">Music</a></li>
+        <li><a href="#!" class="indigo-text">Video Games</a></li>
       </ul>
       <nav>
         <div class="nav-wrapper indigo darken-4 main-header">
           <!-- <a href="#!" class="brand-logo">NSearch</a> -->
           <img class="brand-logo" src="./assets/images/NSearch_LOGO_White.png" />
 
-          <ul class="right hide-on-med-and-down">
-            <li><i class="small material-icons">whatshot</i>
+          <ul class="right hide-on-med-and-down" id="nav-links">
+            <li><a href="#!"><i id="whats-hot-btn" class="medium material-icons">whatshot</i></a>
             </li>
             <!-- Dropdown Trigger -->
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Categories<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -34,29 +36,54 @@
         </div>
       </nav>
 
-    <div class="nav-wrapper indigo lighten-1 center-align" id="category-div">
+
+    <div class="nav-wrapper indigo lighten-1 center-align" id="category-name-div">
         <h6 id ="category-name">Category Name goes here</h6>
     </div>
               
 
 
-<div class="container">
-      <div class="row">
-            <div class="col s12 m6 offset-s1 offset-m3">
-              <div class="card indigo darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title"></span>
-                  <p>This is why I like this thing and I think you should like it too.</p>
+    <div class="container">
+          <div class="row">
+                <div class="col s12 m8 offset-s0 offset-m2">
+                  <!-- This is where all the activity around MOVIES will go. Hidden until click -->
+                  <div id="movies-activity-div" class="category-activity-div"></div>
+                  <!-- This is where all the activity around BOOKS will go. Hidden until click -->
+                  <div id="books-activity-div" class="category-activity-div"></div>
+                  <!-- This is where all the activity around MUSIC will go. Hidden until click -->
+                  <div id="music-activity-div" class="category-activity-div"></div>
+                  <!-- This is where all the activity around VIDEO GAMES will go. Hidden until click -->
+                  <div id="videogames-activity-div" class="category-activity-div"></div>
+                  <!-- This is where WHATS HOT will go. Hidden until click -->
+                  <div id="whatshot-activity-div" class="category-activity-div"></div>
+
+
+
+                  <div class="card indigo darken-1">
+                    <div class="card-content white-text">
+                      <div class="card-header">
+                        <a href="#"><span>Isaac123</span></a></br>
+                        <a href="#"><span>Movies</span></a>
+                        <hr>
+                      </div>
+
+                      <span class="card-title"> <h5 class="center-align">Title</h5></span> 
+                      <p>This is why I like this thing and I think you should like it too. Here is some more text
+                        about why I think it is so great. 
+                      </p>
+                      
+                    </div>
+                    <div class="card-action">
+                    <a href="#"><i class="tiny material-icons">favorite
+                    </i></a>
+                      <a href="#">Reply </a>
+                      <a href="#">View Replies </a>
                   
-                </div>
-                <div class="card-action">
-                 <a href="#"><i class="tiny material-icons">favorite
-                </i></a>
-                  <a href="#">Reply </a>
-                  <a href="#">View Replies </a>
-               
-                </div>
-              </div>
+                  </div>
+            </div>
+
+
+
                             <!-- Modal Trigger -->
      
                 <!-- Modal Structure -->
@@ -66,10 +93,10 @@
                     <p>A bunch of text</p>
                     <div class="input-field col s12">
                         <select>
-                          <option value="" disabled selected>Choose your option</option>
+                          <!-- <option value="" disabled selected>Choose your option</option>
                           <option value="1">Option 1</option>
                           <option value="2">Option 2</option>
-                          <option value="3">Option 3</option>
+                          <option value="3">Option 3</option> -->
                         </select>
                         <label>Materialize Select</label>
                       </div>
@@ -80,32 +107,16 @@
                 </div>
             </div>
           </div>
-         
-
- </div>
- <div class="fixed-action-bnt">
-    <a class="waves-effect waves-light btn-floating modal-trigger red" href="#modal1" id="makeAPost-btn"> 
-      <i class="small material-icons">add</i>
-    </a>
-    <ul>
-        <a class="waves-effect waves-light btn-floating yellow darken-2" id="book-post">
-          <i class="small material-icons">local_library</i>
-        </a>
 
 
-        <a class="waves-effect waves-light btn-floating green" id="movie-post"> 
-          <i class="small material-icons">movie</i></a>
 
 
-        <a class="waves-effect waves-light btn-floating  blue" id="music-post"> 
-          <i class="small material-icons">music_note</i></a>
-
-  
-        <a class="waves-effect waves-light btn-floating indigo" id="videogame-post"> 
-          <i class="small material-icons">keyboard</i></a>
-      </ul>
  
  </div>
+ <div id="modal-button">
+    <a class="btn-floating waves-effect waves-red modal-trigger red right" href="#modal1" id="makeAPost-btn"> 
+      <i class="small material-icons">add</i></a>
+  </div>
 
  </body>  
               
