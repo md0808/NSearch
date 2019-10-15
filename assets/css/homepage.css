@@ -16,3 +16,13 @@ h6 {
 #modal1{
     height: 300px;
 }
+
+.brand-logo{
+    height: 100px;
+    width: 125px;
+    margin-left: 25px;
+}
+
+nav{
+    height: 100px;
+}
