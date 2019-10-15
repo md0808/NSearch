@@ -1,4 +1,5 @@
 var search = "eminem";
+// search term based on user input
 
 var settings = {
   async: true,
@@ -12,5 +13,6 @@ var settings = {
 };
 
 $.ajax(settings).done(function(response) {
+  // ajax response
   console.log(response);
 });
