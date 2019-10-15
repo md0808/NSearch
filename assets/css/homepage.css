@@ -3,7 +3,7 @@
     align-self: center;
 }
 
-#category-div{
+#category-name-div{
     min-height: 50px;
     z-index: -4;
     padding-top: 12px;
@@ -21,8 +21,36 @@ h6 {
     height: 100px;
     width: 125px;
     margin-left: 25px;
+    margin-top: 10px;
 }
 
 nav{
-    height: 100px;
+    height: 120px;
+}
+
+#nav-links {
+    padding-top: 16px;
+}
+
+#modal-button {
+    position: fixed;
+    bottom: 40px; 
+    right: 40px;
+    z-index: 40;
+}
+
+.card {
+    margin-top: 20px;
+}
+
+.card-header a:link {
+    color: #FFAB40;
+    line-height: 30px;
+    font-weight: bolder;
+}
+.card-header a:visited{
+    color: #ffee58;
+    line-height: 30px;
+    font-weight: bolder;
+    
 }
