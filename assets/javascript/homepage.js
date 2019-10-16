@@ -30,6 +30,10 @@ $(document).ready(function(){
   $('select').formSelect();
 });
 
+$(document).ready(function(){
+  $('.tooltipped').tooltip();
+});
+
 //Create new post modal shows
 $("#makeAPost-btn").on("click", function(){
     console.log ("post btn clicked");
