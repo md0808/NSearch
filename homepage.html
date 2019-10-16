@@ -39,11 +39,10 @@
     </div>
   </nav>
 
-
+  <!-- Sub-Navigation -->
   <div class="nav-wrapper indigo lighten-1 center-align" id="category-name-div">
     <h6 id="category-name">Category Name goes here</h6>
   </div>
-
 
 
   <div class="container">
@@ -61,7 +60,7 @@
         <div id="whatshot-activity-div" class="category-activity-div"></div>
 
 
-
+        <!-- This is a card. All posts and replies will take this form -->
         <div class="card indigo darken-1">
           <div class="card-content white-text">
             <div class="card-header">
@@ -79,8 +78,8 @@
           <div class="card-action">
             <span class="num-favories">55</span> &nbsp; <a href="#"><i class="tiny material-icons">favorite
               </i></a>
-            <a href="#">Reply </a>
-            <a href="#" class="view-replies">View Replies </a>
+              <a href="#reply-modal" class="reply modal-trigger" id="reply-modal-btn">Reply </a>
+              <a href="#" class="view-replies">View Replies </a>
           </div>
           <div class="replies card-content white-text">
             <div class="card-header">
@@ -92,7 +91,7 @@
           <div class="card-action">
             <span class="num-favories">1</span> &nbsp; <a href="#"><i class="tiny material-icons">favorite
               </i></a>
-            <a href="#" class="reply">Reply</a>
+            <a href="#reply-modal" class="reply modal-trigger" id="reply-modal-btn">Reply </a>
           </div>
         </div>
 
@@ -113,64 +112,84 @@
           <div class="card-action">
             <span class="num-favories">32</span> &nbsp; <a href="#"><i class="tiny material-icons">favorite
               </i></a>
-            <a href="#" class="reply">Reply </a>
+            <a href="#reply-modal" class="reply modal-trigger" id="reply-modal-btn">Reply </a>
             <a href="#" class="view-replies">View Replies </a>
           </div>
 
         </div>
-
-
-
       </div>
 
+        <!-- Modal Structure -->
+        <div id="createAPost-modal" class="modal modal-fixed-footer">
+            <div class="modal-content container">
+                <h4 class="center-align indigo-text bold">Create A New Post</h4>
+                      <div class="row">
+                          <div class="input-field col m6 s10 offset-s1"> 
+                              <input placeholder="Ex: Cpt_Splunky" id="post-username" type="text" class="validate">
+                              <label for="first_name">Username</label>
+                          </div>
+                          <div class="input-field col s10 offset-s1 m6">
+                              <select class="indigo-text">
+                                <option  value="music-category">Music</option>
+                                <option class="indigo-text" value="book-category">Books</option>
+                                <option class="indigo-text" value="movies-category">Movies</option>
+                                <option class="indigo-text" value="videogames-category">Video Games</option>
+                              </select>
+                              <label>Select Category</label>
+                           </div>   
+                           <h5 for="first_name" class="indigo-text"> Post Title </h5>
+                    </div>
+                      <div class="row">
+                          <div class="col s12">
+                          </div>
+                          <div class="input-field">
+                              <input id="post-title" placeholder="Ex: A New Game To Play" type="email" class="validate">
+                              <label for="post-title">I am NSearch of: </label>
+                          </div>
+                          <div class="input-field col s12">
+                              <h5 for="textarea1" class="center-align">Post:</h5>
+                              <textarea id="post-content" rows="20" cols="50"></textarea>
+                          </div>
+                       </div>
+                    <div class="modal-footer">
+                        <div class=row>
+                          <div class="col s12 center-align">
+                              <button href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo">Cancel</button>
+                              <button type="button" href="#!" class="modal-close waves-effect waves-green btn-flat indigo" onclick="createNewPost()">Create</button>
+                          </div>
+                       </div>
+                    </div>
+              </div>   <!-- Modal content -->
+        </div>    <!-- modal div Structure -->
 
-      <!-- Modal Trigger -->
 
-      <!-- Modal Structure -->
-      <div id="createAPost-Modal" class="modal modal-fixed-footer">
-        <div class="modal-content">
-          <h4 class="center-align">Create A New Post</h4>
-          <div class="row">
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s6">
-                  <input placeholder="Ex: Cpt_Splunky" id="post-username" type="text" class="validate">
-                  <label for="first_name">Username</label>
-                </div>
-                <div class="input-field col s6">
-                  <div class="input-field col s12 m6">
-
-                    <!-- THIS IS WHAT ISNT WORKING...-->
-                    <select>
-                      <option>Test</option>
-                    </select>
-                    <label>Select Post Category</label>
+             <!--Reply  Modal Structure -->
+             <div id="reply-modal" class="modal">
+                <div class="modal-content">
+                    <h4 class="center-align indigo-text bold">Reply to Post</h4>
+                    <div class="row">
+                        <div class="input-field col m6 s10 offset-s1"> 
+                            <input placeholder="Ex: Cpt_Splunky" id="post-username" type="text" class="validate">
+                            <label for="first_name">Username</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <h5 for="textarea1" class="center-align">Post:</h5>
+                            <textarea id="post-content" rows="20" cols="50"></textarea>
+                        </div>
+                     </div>
+                  <div class="modal-footer">
+                      <div class=row>
+                        <div class="col s12 center-align">
+                            <button href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo">Cancel</button>
+                            <button type="button" href="#!" class="modal-close waves-effect waves-green btn-flat indigo" onclick="createReply()">Leave Reply</button>
+                        </div>
+                     </div>
                   </div>
                 </div>
-
-                <div class="input-field col s12 center-align">
-                  <hr>
-                  <h5 for="first_name">Title</h5>
-                  I am NSearch of:
-                  <div class="input-field inline">
-                    <input id="post-title" placeholder="Ex: A New Game To Play" type="email" class="validate">
-                  </div>
-                </div>
-
-                <div class="input-field col s12">
-                  <h5 for="textarea1" class="center-align">Post:</h5>
-                  <textarea id="post-content" rows="20" cols="50"></textarea>
-                </div>
-              </div>
-          </div>
-          <div class="modal-footer">
-              <button href="#!" class="modal-close waves-effect waves-green btn-flat indigo">Cancel</button>
-              <button type="button" href="#!" class="modal-close waves-effect waves-green btn-flat indigo" onclick="createNewPost()">Create</button>
-          </div>
+               
+            </div>
         </div>
       </div>
-    </div>
-
 
 
 
@@ -178,9 +197,9 @@
   </div>
   <!--Container-->
 
-
-  <div id="modal-button">
-    <a class="btn-floating waves-effect waves-red modal-trigger red right" href="#createAPost-Modal" id="makeAPost-btn">
+ <!-- Modal Trigger -->
+ <div id="modal1-button">
+    <a class="btn-floating waves-effect waves-red modal-trigger hoverable red" href="#createAPost-modal" id="makeAPost-btn"> 
       <i class="small material-icons">add</i></a>
   </div>
 
