@@ -26,6 +26,7 @@ $( document ).ready(function() {
     $(".dropdown-trigger").dropdown();
 })
 
+//Create new post modal shows
 $("#makeAPost-btn").on("click", function(){
     console.log ("post btn clicked");
     $("#createAPost-modal").modal();
@@ -41,7 +42,7 @@ $("#reply-modal-btn").on("click", function(){
   });
 
 //this is the function the pushes the post info the the correct db category
-function createNewPost(){
+function pushPostToDatabase(){
     console.log("Create a new post btn clicked");
 
     var newPostRef = "";
@@ -59,9 +60,54 @@ function createNewPost(){
         console.log("newPostRef: " + newPostRef);
 
         database.ref(newPostRef).set({
+            postTitle: post_title,
             postUsername: post_username,
             postCategory: post_category,
-            post_content: post_content
+            postContent: post_content
         })
     }
+    
+    createNewPost();
+}
+
+//This function creates the UI Post Elements
+function createNewPost(){
+    var newPost_Username = "";
+    var newPost_Category = "";
+    var newPost_Title = "";
+    var newPost_Content = "";
+
+    database.ref(videoGamesPostsRef).on("child_added", function(data) {
+        console.log(data.val());
+
+        newPost_Username = data.val().postUsername;
+        newPost_Category = data.val().postCategory;
+        newPost_Title= data.val().postTitle;
+        newPost_Content = data.val().postContent;
+      });
+
+      var newPost = $("<div class='card indigo darken-1'>" +
+      "<div class='card-content white-text'>" +
+        "<div class='card-header'>" +
+          "<a href='#'><span>" + newPost_Username + "</span></a></br>" +
+          "<a href='#'><span>" + newPost_Category + "</span></a>" +
+          "<hr>" +
+        "</div>" +
+        "<span class='card-title'>" +
+          "<h5 class='center-align'>" + newPost_Title + "</h5>" +
+        "</span>" +
+        "<p>" + newPost_Content +
+        "</p>" +
+      "</div>" +
+      "<div class='card-action'>" +
+        "<span class='num-favories'>32</span> &nbsp; <a href='#'><i class='tiny material-icons'>favorite" +
+          "</i></a>" +
+        "<a href='#' class='reply'>Reply </a>" +
+        "<a href='#' class='view-replies'>View Replies </a>" +
+      "</div>" +
+    "</div>"
+    );
+
+    $("#mainContent").append(newPost);
+  
 }
