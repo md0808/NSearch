@@ -48,7 +48,7 @@
 
   <div class="container">
     <div class="row">
-      <div class="col s12 m8 offset-s0 offset-m2">
+      <div id="mainContent" class="col s12 m8 offset-s0 offset-m2">
         <!-- This is where all the activity around MOVIES will go. Hidden until click -->
         <div id="movies-activity-div" class="category-activity-div"></div>
         <!-- This is where all the activity around BOOKS will go. Hidden until click -->
@@ -165,7 +165,7 @@
           </div>
           <div class="modal-footer">
               <button href="#!" class="modal-close waves-effect waves-green btn-flat indigo">Cancel</button>
-              <button type="button" href="#!" class="modal-close waves-effect waves-green btn-flat indigo" onclick="createNewPost()">Create</button>
+              <button type="button" href="#!" class="modal-close waves-effect waves-green btn-flat indigo" onclick="pushPostToDatabase()">Create</button>
           </div>
         </div>
       </div>
