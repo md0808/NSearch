@@ -47,6 +47,7 @@
 
   <div class="container">
     <div class="row">
+
       <div id="mainContent" class="col s12 m8 offset-s0 offset-m2">
         <!-- This is where all the activity around MOVIES will go. Hidden until click -->
         <div id="movies-activity-div" class="category-activity-div"></div>
@@ -78,7 +79,7 @@
           <div class="card-action">
             <span class="num-favories">55</span> &nbsp; <a href="#"><i class="tiny material-icons">favorite
               </i></a>
-              <a href="#reply-modal" class="reply modal-trigger" id="reply-modal-btn">Reply </a>
+              <a href="#reply-modal"  class="reply modal-trigger reply-modal-btn">Reply </a>
               <a href="#" class="view-replies">View Replies </a>
           </div>
           <div class="replies card-content white-text">
@@ -91,7 +92,7 @@
           <div class="card-action">
             <span class="num-favories">1</span> &nbsp; <a href="#"><i class="tiny material-icons">favorite
               </i></a>
-            <a href="#reply-modal" class="reply modal-trigger" id="reply-modal-btn">Reply </a>
+            <a href="#reply-modal" class="reply modal-trigger reply-modal-btn">Reply </a>
           </div>
         </div>
 
@@ -112,7 +113,7 @@
           <div class="card-action">
             <span class="num-favories">32</span> &nbsp; <a href="#"><i class="tiny material-icons">favorite
               </i></a>
-            <a href="#reply-modal" class="reply modal-trigger" id="reply-modal-btn">Reply </a>
+            <a href="#reply-modal" class="reply modal-trigger reply-modal-btn">Reply </a>
             <a href="#" class="view-replies">View Replies </a>
           </div>
 
@@ -168,36 +169,32 @@
                 <div class="modal-content">
                     <h4 class="center-align indigo-text bold">Reply to Post</h4>
                     <div class="row">
-                        <div class="input-field col m6 s10 offset-s1"> 
-                            <input placeholder="Ex: Cpt_Splunky" id="post-username" type="text" class="validate">
-                            <label for="first_name">Username</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <h5 for="textarea1" class="center-align">Post:</h5>
-                            <textarea id="post-content" rows="20" cols="50"></textarea>
-                        </div>
+                          <div class="input-field col m6 s10 offset-s1"> 
+                              <input placeholder="Ex: Cpt_Splunky" id="post-username" type="text" class="validate">
+                              <label for="first_name">Username</label>
+                          </div>
+                          <div class="input-field col s12">
+                              <h5 for="textarea1" class="center-align">Post:</h5>
+                              <textarea id="post-content" rows="20" cols="50"></textarea>
+                          </div>
                      </div>
-                  <div class="modal-footer">
-                      <div class=row>
-                        <div class="col s12 center-align">
-                            <button href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo">Cancel</button>
-                            <button type="button" href="#!" class="modal-close waves-effect waves-green btn-flat indigo" onclick="createReply()">Leave Reply</button>
-                        </div>
-                     </div>
-                  </div>
-                </div>
-          </div>
+                      <div class="modal-footer">
+                          <div class=row>
+                            <div class="col s12 center-align">
+                                <button href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo">Cancel</button>
+                                <button type="button" href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo" onclick="createReply()">Leave Reply</button>
+                            </div>
+                          </div>
+                      </div>
+                 </div>
+              </div>
+
       </div>
-
-
-
-
-  </div>
-  <!--Container-->
+  </div><!--Container-->
 
  <!-- Modal Trigger -->
  <div id="modal1-button">
-    <a class="btn-floating waves-effect waves-red modal-trigger hoverable red" href="#createAPost-modal" id="makeAPost-btn"> 
+    <a class="btn-floating waves-effect waves-red modal-trigger hoverable tooltipped red" data-position="left" data-tooltip="Create a new Post" href="#createAPost-modal" id="makeAPost-btn"> 
       <i class="small material-icons">add</i></a>
   </div>
 
