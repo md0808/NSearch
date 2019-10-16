@@ -13,8 +13,8 @@ h6 {
     color: white;
 }
 
-#modal1{
-    height: 300px;
+#createAPost-modal{
+    min-height: 400px;
 }
 
 .brand-logo{
@@ -35,7 +35,7 @@ nav{
     font-weight: bolder;
 }
 
-#modal-button {
+#modal1-button {
     position: fixed;
     bottom: 40px; 
     right: 40px;

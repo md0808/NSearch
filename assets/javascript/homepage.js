@@ -29,8 +29,17 @@ $( document ).ready(function() {
 //Create new post modal shows
 $("#makeAPost-btn").on("click", function(){
     console.log ("post btn clicked");
-    $("#createAPost-Modal").modal();
+    $("#createAPost-modal").modal();
 })
+
+$("#reply-modal-btn").on("click", function(){
+    console.log ("post btn clicked");
+    $("#reply-modal").modal();
+})
+
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
 
 //this is the function the pushes the post info the the correct db category
 function pushPostToDatabase(){
