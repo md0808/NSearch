@@ -1,11 +1,3 @@
-/*
-TODO
-1. createNewPost needs to listen for on child_added for more than
-just videogameRef
-2. Ensure posts are going to correct category
-
-*/
-
 var firebaseConfig = {
   apiKey: "AIzaSyBNbx0JW21-f2EJeIbpsDHcNdftO96nvBY",
   authDomain: "nsearch-d5965.firebaseapp.com",
