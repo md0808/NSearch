@@ -59,10 +59,6 @@ $("#makeAPost-btn").on("click", function() {
   $("#createAPost-modal").modal();
 });
 
-$(".reply-modal-btn").on("click", function() {
-  $("#reply-modal").modal();
-});
-
 //this is the function the pushes the post info the the correct db category
 function pushPostToDatabase() {
   //var newPostRef = "";
@@ -109,12 +105,21 @@ function pushPostToDatabase() {
     newPostRef = videoGamesPostsRef + "/" + postID;
   }
 
+  var commentsRef = newPostRef + "/comments";
+
+  //post info is getting set here
   database.ref(newPostRef).set({
     postTitle: post_title,
     postUsername: post_username,
     postCategory: post_category,
     postContent: post_content
   });
+
+  //post comments are getting set here
+  database.ref(commentsRef).set({
+    commentUsername: "",
+    comment:""
+  })
 
   createNewPost(postID);
 }
@@ -161,13 +166,18 @@ function showPostUI(data, postID) {
       "<div class='card-action'>" +
       "<span class='num-favories'>32</span> &nbsp; <a href='#'><i class='tiny material-icons'>favorite" +
       "</i></a>" +
-      "<a href='#' class='reply'>Reply </a>" +
+      "<a href='#reply-modal' id='reply-modal-btn' class='reply-modal-btn'>Reply</a>" +
       "<a href='#' class='view-replies'>View Replies </a>" +
       "</div>" +
       "</div>"
   );
 
   $("#mainContent").prepend(newPost);
+
+  $("#reply-modal-btn").on("click", function() {
+    $("#reply-modal").modal();
+    console.log("reply modal show");
+  });
 }
 
 function musicSort() {
