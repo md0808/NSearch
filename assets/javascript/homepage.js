@@ -49,11 +49,9 @@ $("#makeAPost-btn").on("click", function() {
 
 $("#reply-modal-btn").on("click", function() {
   $("#postReply-modal").modal('open');
-  console.log("reply modal show");
 });
 
 $("#push-to-database").on("click", function (){
-  console.log("Create post button is being clicked");
   $("#post-username").val("");
   $("#post-title").val("");
   $("#post-content").val("");
@@ -153,8 +151,6 @@ function createNewPost(postID) {
   var newPost_Category = "";
   var newPost_Title = "";
   var newPost_Content = "";
-
-  console.log("create new post function called");
 }
 
 function showPostUI(data, postID) {
@@ -164,8 +160,6 @@ function showPostUI(data, postID) {
   newPost_Content = data.val().postContent;
 
   var onclickFunction = "$('#postReply-modal').modal('open');";
-
-  console.log(onclickFunction);
 
   var newPost = $(
     "<div class='card indigo darken-1'>" +
@@ -212,11 +206,6 @@ function showPostUI(data, postID) {
     $("#videogames-activity-div").prepend(newPost);
     $("#mainContent").prepend(newPost);
   } else $("#mainContent").prepend(newPost);
-
-  // $(".reply-modal-btn").on("click", function() {
-  //     $("#postReply-modal").modal();
-  //     console.log("reply modal show");
-  // });
 
   $(".reply-modal-btn").attr("onclick", onclickFunction);
 }
