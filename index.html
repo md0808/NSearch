@@ -19,21 +19,21 @@
 
   <!-- Dropdown Structure -->
   <ul id="dropdown1" class="dropdown-content">
-    <li><a href="#!" class="indigo-text">Movies</a></li>
-    <li><a href="#!" class="indigo-text">Books</a></li>
-    <li><a href="#!" class="indigo-text music-button">Music</a></li>
-    <li><a href="#!" class="indigo-text">Video Games</a></li>
+    <li><a class="indigo-text movies-button">Movies</a></li>
+    <li><a class="indigo-text books-button">Books</a></li>
+    <li><a class="indigo-text music-button">Music</a></li>
+    <li><a class="indigo-text videogames-button">Video Games</a></li>
   </ul>
   <nav>
     <div class="nav-wrapper indigo darken-4 main-header">
-      <!-- <a href="#!" class="brand-logo">NSearch</a> -->
-      <img class="brand-logo" src="./assets/images/NSearch_LOGO_White.png" />
+
+      <img class="brand-logo hoverable" src="./assets/images/NSearch_LOGO_White.png" />
 
       <ul class="right hide-on-med-and-down" id="nav-links">
         <li><a href="#!"><i id="whats-hot-btn" class="medium material-icons">whatshot</i></a>
         </li>
         <!-- Dropdown Trigger -->
-        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Categories<i
+        <li><a class="dropdown-trigger" data-target="dropdown1">Categories<i
               class="material-icons right">arrow_drop_down</i></a></li>
       </ul>
     </div>
@@ -41,24 +41,23 @@
 
   <!-- Sub-Navigation -->
   <div class="nav-wrapper indigo lighten-1 center-align" id="category-name-div">
-    <h6 id="category-name">Category Name goes here</h6>
+    <h6 id="category-name">The Latest Posts</h6>
   </div>
 
 
   <div class="container">
     <div class="row">
-
-      <div id="mainContent" class="col s12 m8 offset-s0 offset-m2">
-        <!-- This is where all the activity around MOVIES will go. Hidden until click -->
-        <div id="movies-activity-div" class="category-activity-div"></div>
-        <!-- This is where all the activity around BOOKS will go. Hidden until click -->
-        <div id="books-activity-div" class="category-activity-div"></div>
-        <!-- This is where all the activity around MUSIC will go. Hidden until click -->
-        <div id="music-activity-div" class="category-activity-div"></div>
-        <!-- This is where all the activity around VIDEO GAMES will go. Hidden until click -->
-        <div id="videogames-activity-div" class="category-activity-div"></div>
-        <!-- This is where WHATS HOT will go. Hidden until click -->
-        <div id="whatshot-activity-div" class="category-activity-div"></div>
+          <div id="mainContent" class="col s12 m8 offset-s0 offset-m2"></div>
+          <!-- This is where all the activity around MOVIES will go. Hidden until click -->
+          <div id="movies-activity-div" class="category-activity-div col s12 m8 offset-s0 offset-m2"></div>
+          <!-- This is where all the activity around BOOKS will go. Hidden until click -->
+          <div id="books-activity-div col s12 m8 offset-s0 offset-m2" class="category-activity-div"></div>
+          <!-- This is where all the activity around MUSIC will go. Hidden until click -->
+          <div id="music-activity-div col s12 m8 offset-s0 offset-m2" class="category-activity-div"></div>
+          <!-- This is where all the activity around VIDEO GAMES will go. Hidden until click -->
+          <div id="videogames-activity-div" class="category-activity-div col s12 m8 offset-s0 offset-m2"></div>
+          <!-- This is where WHATS HOT will go. Hidden until click -->
+          <div id="whatshot-activity-div" class="category-activity-div col s12 m8 offset-s0 offset-m2"></div>
 
         <!-- Modal Structure -->
         <div id="createAPost-modal" class="modal modal-fixed-footer">
@@ -67,7 +66,7 @@
                       <div class="row">
                           <div class="input-field col m6 s10 offset-s1"> 
                               <input placeholder="Ex: Cpt_Splunky" id="post-username" type="text" class="validate">
-                              <label for="first_name">Username</label>
+                              <label for="post-username">Username</label>
                           </div>
                           <div class="input-field col s10 offset-s1 m6">
                               <select id="post-category" class="indigo-text">
@@ -85,7 +84,7 @@
                                 <div class="row">
                                   <div class="input-field col s12">
                                     <textarea id="post-title" class="materialize-textarea"></textarea>
-                                    <label for="textarea1">Title your post. I'm NSearch of:</label>
+                                    <label for="post-title">Title your post. I'm NSearch of:</label>
                                   </div>
                                 </div>
                               </form>
@@ -95,7 +94,7 @@
                                 <div class="row">
                                   <div class="input-field col s12">
                                     <textarea id="post-content" class="materialize-textarea"></textarea>
-                                    <label for="textarea1">Give us the details:</label>
+                                    <label for="post-content">Give us the details:</label>
                                   </div>
                                 </div>
                               </form>
@@ -105,7 +104,7 @@
                         <div class=row>
                           <div class="col s12 center-align">
                               <button href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo">Cancel</button>
-                              <button type="button" href="#!" class="modal-close waves-effect waves-green btn-flat indigo" onclick="pushPostToDatabase()">Create</button>
+                              <button type="button" href="#!" class="modal-close waves-effect waves-green btn-flat indigo" id="push-to-database" onclick="pushPostToDatabase()">Create</button>
                           </div>
                        </div>
                     </div>

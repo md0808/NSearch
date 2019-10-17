@@ -71,6 +71,30 @@ nav{
     color: white;
 }
 
+.dropdown-content {
+    color: #1b237e!important;
+}
+.dropdown-content li {
+    color: #1b237e!important;
+
+}
+input.select-dropdown {
+    color: #1b237e!important;
+}
+
+input:focus {
+    border-bottom: 1px solid#1b237e!important;
+    box-shadow: 0 1px 0 0 #1b237e;;
+ }
+
+label:active {
+    color: #005DAB;
+  }
+
+
+  @media screen and (max-width: 990px) {
+
+  }
 
 
 
