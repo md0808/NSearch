@@ -40,17 +40,18 @@ $(".brand-logo").on("click", function() {
   location.reload();
 });
 
+$('.modal').modal();
+
 //Create new post modal shows
 $("#makeAPost-btn").on("click", function() {
-  $("#createAPost-modal").modal();
+  $("#createAPost-modal").modal('open');
 });
 
-$(".reply-modal-btn").on("click", function() {
-  $("#reply-modal").modal();
+$("#reply-modal-btn").on("click", function() {
+  $("#postReply-modal").modal('open');
 });
 
 $("#push-to-database").on("click", function (){
-  console.log("Create post button is being clicked");
   $("#post-username").val("");
   $("#post-title").val("");
   $("#post-content").val("");
@@ -150,8 +151,6 @@ function createNewPost(postID) {
   var newPost_Category = "";
   var newPost_Title = "";
   var newPost_Content = "";
-
-  console.log("create new post function called");
 }
 
 function showPostUI(data, postID) {
@@ -159,6 +158,8 @@ function showPostUI(data, postID) {
   newPost_Category = data.val().postCategory;
   newPost_Title = data.val().postTitle;
   newPost_Content = data.val().postContent;
+
+  var onclickFunction = "$('#postReply-modal').modal('open');";
 
   var newPost = $(
     "<div class='card indigo darken-1'>" +
@@ -186,7 +187,7 @@ function showPostUI(data, postID) {
       "<div class='card-action'>" +
       "<span class='num-favories'>32</span> &nbsp; <a href='#'><i class='tiny material-icons'>favorite" +
       "</i></a>" +
-      "<a href='#reply-modal' id='reply-modal-btn' class='reply-modal-btn'>Reply</a>" +
+      "<a id='reply-modal-btn' class='reply-modal-btn' href='#postReply-modal'>Reply</a>" +
       "<a href='#' class='view-replies'>View Replies </a>" +
       "</div>" +
       "</div>"
@@ -206,14 +207,8 @@ function showPostUI(data, postID) {
     $("#mainContent").prepend(newPost);
   } else $("#mainContent").prepend(newPost);
 
-  $("#reply-modal-btn").on("click", function() {
-      $("#reply-modal").modal();
-      console.log("reply modal show");
-  });
+  $(".reply-modal-btn").attr("onclick", onclickFunction);
 }
-
-
-
 
 function musicSort() {
   // sort through firebase for music category posts / list
@@ -326,7 +321,3 @@ console.log("movies button pushed.")
 $("#category-name").text("Movies")
 moviesSort();
 });
-
-
-
-
