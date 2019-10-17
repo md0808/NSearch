@@ -10,7 +10,7 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics()
+firebase.analytics();
 
 var database = firebase.database();
 
@@ -21,28 +21,28 @@ var moviesPostsRef = "/posts/movies";
 var musicPostsRef = "/posts/music";
 var videoGamesPostsRef = "/posts/videogames";
 
-$( document ).ready(function() {
-    $(".dropdown-trigger").dropdown();
-})
-
-$(document).ready(function(){
-  $('select').formSelect();
+$(document).ready(function() {
+  $(".dropdown-trigger").dropdown();
 });
 
-$(document).ready(function(){
-  $('.tooltipped').tooltip();
+$(document).ready(function() {
+  $("select").formSelect();
+});
+
+$(document).ready(function() {
+  $(".tooltipped").tooltip();
 });
 
 //Create new post modal shows
-$("#makeAPost-btn").on("click", function(){
-    console.log ("post btn clicked");
-    $("#createAPost-modal").modal();
-})
+$("#makeAPost-btn").on("click", function() {
+  console.log("post btn clicked");
+  $("#createAPost-modal").modal();
+});
 
-$(".reply-modal-btn").on("click", function(){
-    console.log ("post btn clicked");
-    $("#reply-modal").modal();
-})
+$(".reply-modal-btn").on("click", function() {
+  console.log("post btn clicked");
+  $("#reply-modal").modal();
+});
 
 //this is the function the pushes the post info the the correct db category
 function pushPostToDatabase() {
@@ -50,27 +50,40 @@ function pushPostToDatabase() {
 
   var newPostRef = "";
 
-  var post_username = $("#post-username").val().trim();
+  var post_username = $("#post-username")
+    .val()
+    .trim();
   //this is only because the dropdown on the modal isn't working
-  var post_category = $("#post-category").val().trim();
-  var post_title = $("#post-title").val().trim();
-  var post_content = $("#post-content").val().trim();
+  var post_category = $("#post-category")
+    .val()
+    .trim();
+  var post_title = $("#post-title")
+    .val()
+    .trim();
+  var post_content = $("#post-content")
+    .val()
+    .trim();
 
-  console.log(post_username + " : " + post_category + " : " + post_title + " : " + post_content);
+  console.log(
+    post_username +
+      " : " +
+      post_category +
+      " : " +
+      post_title +
+      " : " +
+      post_content
+  );
 
   if (post_category === "Music") {
     newPostRef = musicPostsRef + "/" + post_title;
     console.log("newPostRef: " + newPostRef);
-  }
-  else if (post_category === "Book") {
+  } else if (post_category === "Book") {
     newPostRef = booksPostsRef + "/" + post_title;
     console.log("newPostRef: " + newPostRef);
-  }
-  else if (post_category === "Movies") {
+  } else if (post_category === "Movies") {
     newPostRef = moviesPostsRef + "/" + post_title;
     console.log("newPostRef: " + newPostRef);
-  }
-  else if (post_category === "Video Games") {
+  } else if (post_category === "Video Games") {
     newPostRef = videoGamesPostsRef + "/" + post_title;
     console.log("newPostRef: " + newPostRef);
   }
@@ -80,7 +93,7 @@ function pushPostToDatabase() {
     postUsername: post_username,
     postCategory: post_category,
     postContent: post_content
-  })
+  });
 
   createNewPost();
 }
@@ -93,31 +106,31 @@ function createNewPost() {
   var newPost_Content = "";
 
   //Video Games
-  database.ref(videoGamesPostsRef).on("child_added", function (data) {
+  database.ref(videoGamesPostsRef).on("child_added", function(data) {
     console.log(data.val());
 
     showPostUI(data);
   });
 
   //Movies
-  database.ref(moviesPostsRef).on("child_added", function (data) {
+  database.ref(moviesPostsRef).on("child_added", function(data) {
     console.log(data.val());
 
     showPostUI(data);
   });
 
   //Music
-  database.ref(musicPostsRef).on("child_added", function (data) {
+  database.ref(musicPostsRef).on("child_added", function(data) {
     console.log(data.val());
 
     showPostUI(data);
   });
 
   //Books
-  database.ref(booksPostsRef).on("child_added", function (data) {
+  database.ref(booksPostsRef).on("child_added", function(data) {
     console.log(data.val());
 
-    showPostUI(data)
+    showPostUI(data);
   });
 
   function showPostUI(data) {
@@ -126,28 +139,51 @@ function createNewPost() {
     newPost_Title = data.val().postTitle;
     newPost_Content = data.val().postContent;
 
-    var newPost = $("<div class='card indigo darken-1'>" +
-      "<div class='card-content white-text'>" +
+    var newPost = $(
+      "<div class='card indigo darken-1'>" +
+        "<div class='card-content white-text'>" +
         "<div class='card-header'>" +
-          "<a href='#'><span>" + newPost_Username + "</span></a></br>" +
-          "<a href='#'><span>" + newPost_Category + "</span></a>" +
-          "<hr>" +
-       "</div>" +
+        "<a href='#'><span>" +
+        newPost_Username +
+        "</span></a></br>" +
+        "<a href='#'><span>" +
+        newPost_Category +
+        "</span></a>" +
+        "<hr>" +
+        "</div>" +
         "<span class='card-title'>" +
-          "<h5 class='center-align'>" + newPost_Title + "</h5>" +
+        "<h5 class='center-align'>" +
+        newPost_Title +
+        "</h5>" +
         "</span>" +
-        "<p>" + newPost_Content +
+        "<p>" +
+        newPost_Content +
         "</p>" +
-      "</div>" +
-      "<div class='card-action'>" +
+        "</div>" +
+        "<div class='card-action'>" +
         "<span class='num-favories'>32</span> &nbsp; <a href='#'><i class='tiny material-icons'>favorite" +
         "</i></a>" +
         "<a href='#' class='reply'>Reply </a>" +
         "<a href='#' class='view-replies'>View Replies </a>" +
-      "</div>" +
-      "</div>"
+        "</div>" +
+        "</div>"
     );
 
     $("#mainContent").prepend(newPost);
   }
 }
+
+// sort through firebase for music category posts / list
+var query = firebase.database().ref("/posts/music");
+
+query.once("value").then(function(snapshot) {
+  snapshot.forEach(function(childSnapshot) {
+    // title of each instance of music
+    var key = childSnapshot.key;
+    console.log(key);
+
+    // data within each instance
+    var childData = childSnapshot.val();
+    console.log(childData);
+  });
+});
