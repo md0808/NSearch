@@ -47,108 +47,108 @@
 
   <div class="container">
     <div class="row">
-          <div id="mainContent" class="col s12 m8 offset-s0 offset-m2"></div>
-          <!-- This is where all the activity around MOVIES will go. Hidden until click -->
-          <div id="movies-activity-div" class="category-activity-div col s12 m8 offset-s0 offset-m2"></div>
-          <!-- This is where all the activity around BOOKS will go. Hidden until click -->
-          <div id="books-activity-div col s12 m8 offset-s0 offset-m2" class="category-activity-div"></div>
-          <!-- This is where all the activity around MUSIC will go. Hidden until click -->
-          <div id="music-activity-div col s12 m8 offset-s0 offset-m2" class="category-activity-div"></div>
-          <!-- This is where all the activity around VIDEO GAMES will go. Hidden until click -->
-          <div id="videogames-activity-div" class="category-activity-div col s12 m8 offset-s0 offset-m2"></div>
-          <!-- This is where WHATS HOT will go. Hidden until click -->
-          <div id="whatshot-activity-div" class="category-activity-div col s12 m8 offset-s0 offset-m2"></div>
+      <div id="mainContent" class="col s12 m8 offset-s0 offset-m2"></div>
+      <!-- This is where all the activity around MOVIES will go. Hidden until click -->
+      <div id="movies-activity-div" class="category-activity-div col s12 m8 offset-s0 offset-m2"></div>
+      <!-- This is where all the activity around BOOKS will go. Hidden until click -->
+      <div id="books-activity-div col s12 m8 offset-s0 offset-m2" class="category-activity-div"></div>
+      <!-- This is where all the activity around MUSIC will go. Hidden until click -->
+      <div id="music-activity-div col s12 m8 offset-s0 offset-m2" class="category-activity-div"></div>
+      <!-- This is where all the activity around VIDEO GAMES will go. Hidden until click -->
+      <div id="videogames-activity-div" class="category-activity-div col s12 m8 offset-s0 offset-m2"></div>
+      <!-- This is where WHATS HOT will go. Hidden until click -->
+      <div id="whatshot-activity-div" class="category-activity-div col s12 m8 offset-s0 offset-m2"></div>
 
-        <!-- Modal Structure -->
-        <div id="createAPost-modal" class="modal modal-fixed-footer">
-            <div class="modal-content container">
-                <h4 class="center-align indigo-text bold">Create A New Post</h4>
-                      <div class="row">
-                          <div class="input-field col m6 s10 offset-s1"> 
-                              <input placeholder="Ex: Cpt_Splunky" id="post-username" type="text" class="validate">
-                              <label for="post-username">Username</label>
-                          </div>
-                          <div class="input-field col s10 offset-s1 m6">
-                              <select id="post-category" class="indigo-text">
-                                <option  value="Music">Music</option>
-                                <option class="indigo-text" value="Books">Books</option>
-                                <option class="indigo-text" value="Movies">Movies</option>
-                                <option class="indigo-text" value="Video Games">Video Games</option>
-                              </select>
-                              <label>Select Category</label>
-                           </div>   
-                    </div>
-                            <div class="row">
-                              <form class="col s12">
-                                  <!-- <h5 for="first_name" class="indigo-text"> Post Title </h5>  -->
-                                <div class="row">
-                                  <div class="input-field col s12">
-                                    <textarea id="post-title" class="materialize-textarea"></textarea>
-                                    <label for="post-title">Title your post. I'm NSearch of:</label>
-                                  </div>
-                                </div>
-                              </form>
-                            </div>
-                            <div class="row">
-                              <form class="col s12">
-                                <div class="row">
-                                  <div class="input-field col s12">
-                                    <textarea id="post-content" class="materialize-textarea"></textarea>
-                                    <label for="post-content">Give us the details:</label>
-                                  </div>
-                                </div>
-                              </form>
-                            </div>
-                       </div>
-                    <div class="modal-footer">
-                        <div class=row>
-                          <div class="col s12 center-align">
-                              <button href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo">Cancel</button>
-                              <button type="button" href="#!" class="modal-close waves-effect waves-green btn-flat indigo" id="push-to-database" onclick="pushPostToDatabase()">Create</button>
-                          </div>
-                       </div>
-                    </div>
+      <!-- Modal Structure -->
+      <div id="createAPost-modal" class="modal modal-fixed-footer">
+        <div class="modal-content container">
+          <h4 class="center-align indigo-text bold">Create A New Post</h4>
+          <div class="row">
+            <div class="input-field col m6 s10 offset-s1">
+              <input placeholder="Ex: Cpt_Splunky" id="post-username" type="text" class="validate">
+              <label for="post-username">Username</label>
+            </div>
+            <div class="input-field col s10 offset-s1 m6">
+              <select id="post-category" class="indigo-text">
+                <option value="Music">Music</option>
+                <option class="indigo-text" value="Books">Books</option>
+                <option class="indigo-text" value="Movies">Movies</option>
+                <option class="indigo-text" value="Video Games">Video Games</option>
+              </select>
+              <label>Select Category</label>
+            </div>
+          </div>
+          <div class="row">
+            <form class="col s12">
+              <!-- <h5 for="first_name" class="indigo-text"> Post Title </h5>  -->
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="post-title" class="materialize-textarea"></textarea>
+                  <label for="post-title">Title your post. I'm NSearch of:</label>
+                </div>
               </div>
+            </form>
+          </div>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="post-content" class="materialize-textarea"></textarea>
+                  <label for="post-content">Give us the details:</label>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
-
-
-             <!--Reply  Modal Structure -->
-             <div id="reply-modal" class="modal">
-                <div class="modal-content">
-                    <h4 class="center-align indigo-text bold">Reply to Post</h4>
-                    <div class="row">
-                          <div class="input-field col m6 s10 offset-s1"> 
-                              <input placeholder="Ex: Cpt_Splunky" id="post-username" type="text" class="validate">
-                              <label for="first_name">Username</label>
-                          </div>
-                        <div class="row">
-                            <form class="col s12">
-                              <div class="row">
-                                <div class="input-field col s12">
-                                  <textarea id="textarea1" class="materialize-textarea"></textarea>
-                                  <label for="textarea1">Textarea</label>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-                     </div>
-                      <div class="modal-footer">
-                          <div class=row>
-                            <div class="col s12 center-align">
-                                <button href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo">Cancel</button>
-                                <button type="button" href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo" onclick="createReply()">Leave Reply</button>
-                            </div>
-                          </div>
-                      </div>
-                 </div>
-              </div>
-
+        <div class="modal-footer">
+          <div class=row>
+            <div class="col s12 center-align">
+              <button href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo">Cancel</button>
+              <button type="button" href="#!" class="modal-close waves-effect waves-green btn-flat indigo"
+                id="push-to-database" onclick="pushPostToDatabase()">Create</button>
+            </div>
+          </div>
+        </div>
       </div>
-  </div><!--Container-->
+    </div>
 
- <!-- Modal Trigger -->
- <div id="modal1-button">
-    <a class="btn-floating waves-effect waves-red modal-trigger hoverable tooltipped red" data-position="left" data-tooltip="Create a new Post" href="#createAPost-modal" id="makeAPost-btn"> 
+    <!-- Reply  Modal Structure -->
+    <div id="postReply-modal" class="modal">
+      <div class="modal-content">
+        <h4 class="center-align indigo-text bold">Reply to Post</h4>
+        <div class="row">
+          <div class="input-field col m6 s10 offset-s1">
+            <input placeholder="Ex: Cpt_Splunky" id="post-username" type="text" class="validate">
+            <label for="first_name">Username</label>
+          </div>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="textarea1" class="materialize-textarea"></textarea>
+                  <label for="textarea1">Textarea</label>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class=row>
+            <div class="col s12 center-align">
+              <button href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo">Cancel</button>
+              <button type="button" href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo"
+                onclick="createReply()">Leave Reply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Trigger -->
+  <div id="modal1-button">
+    <a class="btn-floating waves-effect waves-red modal-trigger hoverable tooltipped red" data-position="left"
+      data-tooltip="Create a new Post" href="#createAPost-modal" id="makeAPost-btn">
       <i class="small material-icons">add</i></a>
   </div>
 
