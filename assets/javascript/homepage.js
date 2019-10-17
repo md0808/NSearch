@@ -81,13 +81,29 @@ function pushPostToDatabase() {
 
   //var newPostRef = "";
 
-  var post_username = $("#post-username").val().trim();
+  var post_username = $("#post-username")
+    .val()
+    .trim();
   //this is only because the dropdown on the modal isn't working
-  var post_category = $("#post-category").val().trim();
-  var post_title = $("#post-title").val().trim();
-  var post_content = $("#post-content").val().trim();
+  var post_category = $("#post-category")
+    .val()
+    .trim();
+  var post_title = $("#post-title")
+    .val()
+    .trim();
+  var post_content = $("#post-content")
+    .val()
+    .trim();
 
-  console.log(post_username + " : " + post_category + " : " + post_title + " : " + post_content);
+  console.log(
+    post_username +
+      " : " +
+      post_category +
+      " : " +
+      post_title +
+      " : " +
+      post_content
+  );
 
   var newPostRef = "";
 
@@ -121,7 +137,7 @@ function pushPostToDatabase() {
     postUsername: post_username,
     postCategory: post_category,
     postContent: post_content
-  })
+  });
 
   createNewPost(postID);
 }
@@ -166,3 +182,18 @@ function showPostUI(data, postID) {
 
   $("#mainContent").prepend(newPost);
 }
+
+// sort through firebase for music category posts / list
+var query = firebase.database().ref("/posts/music");
+
+query.once("value").then(function(snapshot) {
+  snapshot.forEach(function(childSnapshot) {
+    // title of each instance of music
+    var key = childSnapshot.key;
+    console.log(key);
+
+    // data within each instance
+    var childData = childSnapshot.val();
+    console.log(childData);
+  });
+});
