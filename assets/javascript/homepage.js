@@ -23,6 +23,7 @@ var moviesPostsRef = "/posts/movies";
 var musicPostsRef = "/posts/music";
 var videoGamesPostsRef = "/posts/videogames";
 
+//Materialize========================================
 $(document).ready(function() {
   $(".dropdown-trigger").dropdown();
 });
@@ -34,6 +35,30 @@ $(document).ready(function() {
 $(document).ready(function() {
   $(".tooltipped").tooltip();
 });
+
+$(".brand-logo").on("click", function() {
+  location.reload();
+});
+
+//Create new post modal shows
+$("#makeAPost-btn").on("click", function() {
+  $("#createAPost-modal").modal();
+});
+
+$(".reply-modal-btn").on("click", function() {
+  $("#reply-modal").modal();
+});
+
+$("#push-to-database").on("click", function (){
+  console.log("Create post button is being clicked");
+  $("#post-username").val("");
+  $("#post-title").val("");
+  $("#post-content").val("");
+
+})
+
+//=====================================================
+
 
 //Music
 database.ref(musicPostsRef).on("child_added", function(data) {
@@ -52,11 +77,6 @@ database.ref(moviesPostsRef).on("child_added", function(data) {
 //Books
 database.ref(booksPostsRef).on("child_added", function(data) {
   showPostUI(data, postID);
-});
-
-//Create new post modal shows
-$("#makeAPost-btn").on("click", function() {
-  $("#createAPost-modal").modal();
 });
 
 //this is the function the pushes the post info the the correct db category
@@ -172,13 +192,28 @@ function showPostUI(data, postID) {
       "</div>"
   );
 
-  $("#mainContent").prepend(newPost);
+  if (newPost_Category === "Movies") {
+    $("#movies-activity-div").prepend(newPost);
+    $("#mainContent").prepend(newPost);
+  } else if (newPost_Category === "Books") {
+    $("#books-activity-div").prepend(newPost);
+    $("#mainContent").prepend(newPost);
+  } else if (newPost_Category === "Music") {
+    $("#music-activity-div").prepend(newPost);
+    $("#mainContent").prepend(newPost);
+  } else if (newPost_Category === "Video Games") {
+    $("#videogames-activity-div").prepend(newPost);
+    $("#mainContent").prepend(newPost);
+  } else $("#mainContent").prepend(newPost);
 
   $("#reply-modal-btn").on("click", function() {
-    $("#reply-modal").modal();
-    console.log("reply modal show");
+      $("#reply-modal").modal();
+      console.log("reply modal show");
   });
 }
+
+
+
 
 function musicSort() {
   // sort through firebase for music category posts / list
@@ -200,6 +235,98 @@ function musicSort() {
 }
 
 $(".music-button").click(function() {
-  $("#mainContent").empty();
+  $("#mainContent").hide()
+  $("#music-activity-div").show();
+  $("#category-name").text("Music")
+  console.log("Music button pushed.")
+
   musicSort();
 });
+
+
+function videogamesSort() {
+  // sort through firebase for books category posts / list
+  var query = firebase.database().ref("/posts/videogames");
+
+  query.once("value").then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      // title of each instance of books
+      var key = childSnapshot.key;
+      console.log(key);
+
+      // data within each instance
+      var childData = childSnapshot;
+      console.log(childData.val());
+
+      showPostUI(childData, key);
+    });
+  });
+}
+
+$(".videogames-button").click(function() {
+  $("#mainContent").hide()
+  $("#videogames-activity-div").show();
+  $("#category-name").text("Video Games")
+  console.log("video games button pushed.")
+  videogamesSort();
+});
+
+function booksSort() {
+  // sort through firebase for books category posts / list
+  var query = firebase.database().ref("/posts/books");
+  
+  query.once("value").then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      // title of each instance of book
+      var key = childSnapshot.key;
+      console.log(key);
+  
+      // data within each instance
+      var childData = childSnapshot;
+      console.log(childData.val());
+  
+      showPostUI(childData, key);
+    });
+  });
+  }
+  
+  $(".books-button").click(function() {
+    $("#mainContent").hide()
+    $("#books-activity-div").show();
+    $("#category-name").text("Books")
+    console.log("books button pushed.")
+    booksSort();
+  });
+  
+
+
+function moviesSort() {
+// sort through firebase for movies category posts / list
+var query = firebase.database().ref("/posts/movies");
+
+query.once("value").then(function(snapshot) {
+  snapshot.forEach(function(childSnapshot) {
+    // title of each instance of movies 
+    var key = childSnapshot.key;
+    console.log(key);
+
+    // data within each instance
+    var childData = childSnapshot;
+    console.log(childData.val());
+
+    showPostUI(childData, key);
+  });
+});
+}
+
+$(".movies-button").click(function() {
+$("#mainContent").hide()
+$("#movies-activity-div").show();
+console.log("movies button pushed.")
+$("#category-name").text("Movies")
+moviesSort();
+});
+
+
+
+
