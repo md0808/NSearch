@@ -174,7 +174,7 @@ function showPostUI(data, postID) {
     "<div class='card-action'>" +
     "<span class='num-favories'>32</span> &nbsp; <a href='#'><i class='tiny material-icons'>favorite" +
     "</i></a>" +
-    "<a href='#' class='reply'>Reply </a>" +
+    "<a href='#reply-modal' class='reply modal-trigger reply-modal-btn'>Reply </a>" +
     "<a href='#' class='view-replies'>View Replies </a>" +
     "</div>" +
     "</div>"
