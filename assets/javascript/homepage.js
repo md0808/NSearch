@@ -10,7 +10,7 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics()
+firebase.analytics();
 
 var database = firebase.database();
 
@@ -23,62 +23,48 @@ var moviesPostsRef = "/posts/movies";
 var musicPostsRef = "/posts/music";
 var videoGamesPostsRef = "/posts/videogames";
 
-$(document).ready(function () {
+$(document).ready(function() {
   $(".dropdown-trigger").dropdown();
-})
-
-$(document).ready(function () {
-  $('select').formSelect();
 });
 
-$(document).ready(function () {
-  $('.tooltipped').tooltip();
+$(document).ready(function() {
+  $("select").formSelect();
+});
+
+$(document).ready(function() {
+  $(".tooltipped").tooltip();
 });
 
 //Music
-database.ref(musicPostsRef).on("child_added", function (data) {
-  console.log(data.val());
-  console.log("showPostUI function called");
-
+database.ref(musicPostsRef).on("child_added", function(data) {
   showPostUI(data, postID);
 });
 
 //Video Games
-database.ref(videoGamesPostsRef).on("child_added", function (data) {
-  console.log(data.val());
-
+database.ref(videoGamesPostsRef).on("child_added", function(data) {
   showPostUI(data, postID);
 });
 
 //Movies
-database.ref(moviesPostsRef).on("child_added", function (data) {
-  console.log(data.val());
-
+database.ref(moviesPostsRef).on("child_added", function(data) {
   showPostUI(data, postID);
 });
 //Books
-database.ref(booksPostsRef).on("child_added", function (data) {
-  console.log(data.val());
-
-  showPostUI(data, postID)
+database.ref(booksPostsRef).on("child_added", function(data) {
+  showPostUI(data, postID);
 });
 
-
 //Create new post modal shows
-$("#makeAPost-btn").on("click", function () {
-  console.log("post btn clicked");
+$("#makeAPost-btn").on("click", function() {
   $("#createAPost-modal").modal();
-})
+});
 
-$(".reply-modal-btn").on("click", function () {
-  console.log("post btn clicked");
+$(".reply-modal-btn").on("click", function() {
   $("#reply-modal").modal();
-})
+});
 
 //this is the function the pushes the post info the the correct db category
 function pushPostToDatabase() {
-  console.log("Create a new post btn clicked");
-
   //var newPostRef = "";
 
   var post_username = $("#post-username")
@@ -95,41 +81,32 @@ function pushPostToDatabase() {
     .val()
     .trim();
 
-  console.log(
-    post_username +
-      " : " +
-      post_category +
-      " : " +
-      post_title +
-      " : " +
-      post_content
-  );
-
   var newPostRef = "";
 
   if (post_category === "Music") {
-    postID = database.ref(musicPostsRef).push().getKey();
+    postID = database
+      .ref(musicPostsRef)
+      .push()
+      .getKey();
     newPostRef = musicPostsRef + "/" + postID;
-    
-    console.log("newPostRef: " + newPostRef);
-  }
-  else if (post_category === "Books") {
-    postID = database.ref(musicPostsRef).push().getKey();
+  } else if (post_category === "Books") {
+    postID = database
+      .ref(musicPostsRef)
+      .push()
+      .getKey();
     newPostRef = booksPostsRef + "/" + postID;
-
-    console.log("newPostRef: " + newPostRef);
-  }
-  else if (post_category === "Movies") {
-    postID = database.ref(musicPostsRef).push().getKey();
+  } else if (post_category === "Movies") {
+    postID = database
+      .ref(musicPostsRef)
+      .push()
+      .getKey();
     newPostRef = moviesPostsRef + "/" + postID;
-
-    console.log("newPostRef: " + newPostRef);
-  }
-  else if (post_category === "Video Games") {
-    postID = database.ref(musicPostsRef).push().getKey();
+  } else if (post_category === "Video Games") {
+    postID = database
+      .ref(musicPostsRef)
+      .push()
+      .getKey();
     newPostRef = videoGamesPostsRef + "/" + postID;
-
-    console.log("newPostRef: " + newPostRef);
   }
 
   database.ref(newPostRef).set({
@@ -158,42 +135,61 @@ function showPostUI(data, postID) {
   newPost_Title = data.val().postTitle;
   newPost_Content = data.val().postContent;
 
-  var newPost = $("<div class='card indigo darken-1'>" +
-    "<div class='card-content white-text'>" +
-    "<div data-id='" + postID + "'class='card-header'>" +
-    "<a href='#'><span>" + newPost_Username + "</span></a></br>" +
-    "<a href='#'><span>" + newPost_Category + "</span></a>" +
-    "<hr>" +
-    "</div>" +
-    "<span class='card-title'>" +
-    "<h5 class='center-align'>" + newPost_Title + "</h5>" +
-    "</span>" +
-    "<p>" + newPost_Content +
-    "</p>" +
-    "</div>" +
-    "<div class='card-action'>" +
-    "<span class='num-favories'>32</span> &nbsp; <a href='#'><i class='tiny material-icons'>favorite" +
-    "</i></a>" +
-    "<a href='#' class='reply'>Reply </a>" +
-    "<a href='#' class='view-replies'>View Replies </a>" +
-    "</div>" +
-    "</div>"
+  var newPost = $(
+    "<div class='card indigo darken-1'>" +
+      "<div class='card-content white-text'>" +
+      "<div data-id='" +
+      postID +
+      "'class='card-header'>" +
+      "<a href='#'><span>" +
+      newPost_Username +
+      "</span></a></br>" +
+      "<a href='#'><span>" +
+      newPost_Category +
+      "</span></a>" +
+      "<hr>" +
+      "</div>" +
+      "<span class='card-title'>" +
+      "<h5 class='center-align'>" +
+      newPost_Title +
+      "</h5>" +
+      "</span>" +
+      "<p>" +
+      newPost_Content +
+      "</p>" +
+      "</div>" +
+      "<div class='card-action'>" +
+      "<span class='num-favories'>32</span> &nbsp; <a href='#'><i class='tiny material-icons'>favorite" +
+      "</i></a>" +
+      "<a href='#' class='reply'>Reply </a>" +
+      "<a href='#' class='view-replies'>View Replies </a>" +
+      "</div>" +
+      "</div>"
   );
 
   $("#mainContent").prepend(newPost);
 }
 
-// sort through firebase for music category posts / list
-var query = firebase.database().ref("/posts/music");
+function musicSort() {
+  // sort through firebase for music category posts / list
+  var query = firebase.database().ref("/posts/music");
 
-query.once("value").then(function(snapshot) {
-  snapshot.forEach(function(childSnapshot) {
-    // title of each instance of music
-    var key = childSnapshot.key;
-    console.log(key);
+  query.once("value").then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      // title of each instance of music
+      var key = childSnapshot.key;
+      console.log(key);
 
-    // data within each instance
-    var childData = childSnapshot.val();
-    console.log(childData);
+      // data within each instance
+      var childData = childSnapshot;
+      console.log(childData.val());
+
+      showPostUI(childData, key);
+    });
   });
+}
+
+$(".music-button").click(function() {
+  $("#mainContent").empty();
+  musicSort();
 });
