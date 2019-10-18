@@ -1,238 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>NSearch</title>
 
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <!--Import materialize.css-->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Archivo+Narrow&display=swap"
-      rel="stylesheet"
-    />
-    <link type="text/css" rel="stylesheet" href="./assets/css/homepage.css" />
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>NSearch</title>
 
-  <body>
-    <!-- Dropdown Structure -->
-    <ul id="dropdown1" class="dropdown-content">
-      <li><a class="indigo-text movies-button">Movies</a></li>
-      <li><a class="indigo-text books-button">Books</a></li>
-      <li><a class="indigo-text music-button">Music</a></li>
-      <li><a class="indigo-text videogames-button">Video Games</a></li>
-    </ul>
-    <nav>
-      <div class="nav-wrapper indigo darken-4 main-header">
-        <img
-          class="brand-logo hoverable"
-          src="./assets/images/NSearch_LOGO_White.png"
-        />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link type="text/css" rel="stylesheet" href="./assets/css/homepage.css">
+</head>
 
-        <ul class="right hide-on-med-and-down" id="nav-links">
-          <li>
-            <a href="#!"
-              ><i id="whats-hot-btn" class="medium material-icons"
-                >whatshot</i
-              ></a
-            >
-          </li>
-          <!-- Dropdown Trigger -->
-          <li>
-            <a class="dropdown-trigger" data-target="dropdown1"
-              >Categories<i class="material-icons right">arrow_drop_down</i></a
-            >
-          </li>
-        </ul>
-      </div>
-    </nav>
+<body>
 
-    <!-- Sub-Navigation -->
-    <div
-      class="nav-wrapper indigo lighten-1 center-align"
-      id="category-name-div"
-    >
-      <h6 id="category-name">The Latest Posts</h6>
+
+
+  <!-- Dropdown Structure -->
+  <ul id="dropdown1" class="dropdown-content">
+    <li><a class="indigo-text movies-button">Movies</a></li>
+    <li><a class="indigo-text books-button">Books</a></li>
+    <li><a class="indigo-text music-button">Music</a></li>
+    <li><a class="indigo-text videogames-button">Video Games</a></li>
+  </ul>
+  <nav>
+    <div class="nav-wrapper indigo darken-4 main-header">
+
+      <img class="brand-logo hoverable" src="./assets/images/NSearch_LOGO_White.png" />
+
+      <ul class="right hide-on-med-and-down" id="nav-links">
+        <li><a href="#!"><i id="whats-hot-btn" class="medium material-icons">whatshot</i></a>
+        </li>
+        <!-- Dropdown Trigger -->
+        <li><a class="dropdown-trigger" data-target="dropdown1">Categories<i
+              class="material-icons right">arrow_drop_down</i></a></li>
+      </ul>
     </div>
+  </nav>
 
-    <div class="container">
-      <div class="row">
-        <div id="mainContent" class="col s12 m8 offset-s0 offset-m2"></div>
-        <!-- This is where all the activity around MOVIES will go. Hidden until click -->
-        <div
-          id="movies-activity-div"
-          class="category-activity-div col s12 m8 offset-s0 offset-m2"
-        ></div>
-        <!-- This is where all the activity around BOOKS will go. Hidden until click -->
-        <div
-          id="books-activity-div col s12 m8 offset-s0 offset-m2"
-          class="category-activity-div"
-        ></div>
-        <!-- This is where all the activity around MUSIC will go. Hidden until click -->
-        <div
-          id="music-activity-div col s12 m8 offset-s0 offset-m2"
-          class="category-activity-div"
-        ></div>
-        <!-- This is where all the activity around VIDEO GAMES will go. Hidden until click -->
-        <div
-          id="videogames-activity-div"
-          class="category-activity-div col s12 m8 offset-s0 offset-m2"
-        ></div>
-        <!-- This is where WHATS HOT will go. Hidden until click -->
-        <div
-          id="whatshot-activity-div"
-          class="category-activity-div col s12 m8 offset-s0 offset-m2"
-        ></div>
+  <!-- Sub-Navigation -->
+  <div class="nav-wrapper indigo lighten-1 center-align" id="category-name-div">
+    <h6 id="category-name">The Latest Posts</h6>
+  </div>
 
-        <!-- Modal Structure -->
-        <div id="createAPost-modal" class="modal modal-fixed-footer">
-          <div class="modal-content container">
-            <h4 class="center-align indigo-text bold">Create A New Post</h4>
-            <div class="row">
-              <div class="input-field col m6 s10 offset-s1">
-                <input
-                  placeholder="Ex: Cpt_Splunky"
-                  id="post-username"
-                  type="text"
-                  class="validate"
-                />
-                <label for="post-username">Username</label>
-              </div>
-              <div class="input-field col s10 offset-s1 m6">
-                <select id="post-category" class="indigo-text">
-                  <option value="Music">Music</option>
-                  <option class="indigo-text" value="Books">Books</option>
-                  <option class="indigo-text" value="Movies">Movies</option>
-                  <option class="indigo-text" value="Video Games"
-                    >Video Games</option
-                  >
-                </select>
-                <label>Select Category</label>
-              </div>
-            </div>
-            <div class="row">
-              <form class="col s12">
-                <!-- <h5 for="first_name" class="indigo-text"> Post Title </h5>  -->
-                <div class="row">
-                  <div class="input-field col s12">
-                    <textarea
-                      id="post-title"
-                      class="materialize-textarea"
-                    ></textarea>
-                    <label for="post-title"
-                      >Title your post. I'm NSearch of:</label
-                    >
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="row">
-              <form class="col s12">
-                <div class="row lessMargin">
-                  <div class="input-field col s12">
-                    <textarea
-                      id="post-content"
-                      class="materialize-textarea"
-                    ></textarea>
-                    <label for="post-content">Give us the details:</label>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="row textRight">Looking for something?</div>
-            <!-- api button -->
-            <div class="apiButtonClass">
-              <div
-                class="fixed-action-btn click-to-toggle direction-top direction-left button-height"
-              >
-                <a class="btn-floating btn-large red">
-                  <i class=" large material-icons">search</i>
-                </a>
-                <ul>
-                  <li>
-                    <a
-                      id="musicApi"
-                      class="btn-floating red tooltipped"
-                      data-tooltip="Search a Song"
-                      style="opacity: 0; transform: scale(0.4) translateY(0px) translateX(40px);"
-                    >
-                      <i class="material-icons">music_note</i>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      class="btn-floating yellow darken-1 tooltipped"
-                      data-tooltip="Find a Video Game"
-                      style="opacity: 0; transform: scale(0.4) translateY(0px) translateX(40px);"
-                    >
-                      <i class="material-icons">games</i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- hidden div for api data -->
-            <div class="hiddenDiv"></div>
 
-            <!-- end of api button -->
-          </div>
+  <div class="container">
+    <div class="row">
+      <div id="mainContent" class="col s12 m8 offset-s0 offset-m2"></div>
+      <!-- This is where all the activity around MOVIES will go. Hidden until click -->
+      <div id="movies-activity-div" class="category-activity-div col s12 m8 offset-s0 offset-m2"></div>
+      <!-- This is where all the activity around BOOKS will go. Hidden until click -->
+      <div id="books-activity-div col s12 m8 offset-s0 offset-m2" class="category-activity-div"></div>
+      <!-- This is where all the activity around MUSIC will go. Hidden until click -->
+      <div id="music-activity-div col s12 m8 offset-s0 offset-m2" class="category-activity-div"></div>
+      <!-- This is where all the activity around VIDEO GAMES will go. Hidden until click -->
+      <div id="videogames-activity-div" class="category-activity-div col s12 m8 offset-s0 offset-m2"></div>
+      <!-- This is where WHATS HOT will go. Hidden until click -->
+      <div id="whatshot-activity-div" class="category-activity-div col s12 m8 offset-s0 offset-m2"></div>
 
-          <div class="modal-footer">
-            <div class="row">
-              <div class="col s12 center-align">
-                <button
-                  href="#!"
-                  class="modal-close waves-effect waves-indigo btn-flat indigo"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  href="#!"
-                  class="modal-close waves-effect waves-green btn-flat indigo"
-                  id="push-to-database"
-                  onclick="pushPostToDatabase()"
-                >
-                  Create
-                </button>
-              </div>
+      <!-- Modal Structure -->
+      <div id="createAPost-modal" class="modal modal-fixed-footer">
+        <div class="modal-content container">
+          <h4 class="center-align indigo-text bold">Create A New Post</h4>
+          <div class="row">
+            <div class="input-field col m6 s10 offset-s1">
+              <input placeholder="Ex: Cpt_Splunky" id="post-username" type="text" class="validate" />
+              <label for="post-username">Username</label>
             </div>
-          </div>
-        </div>
-      </div>
-
-    <!-- Reply  Modal Structure -->
-    <div id="postReply-modal" class="modal">
-      <div class="modal-content">
-        <h4 class="center-align indigo-text bold">Comment to Post</h4>
-        <div class="row">
-          <div class="input-field col m6 s10 offset-s1">
-            <input placeholder="Ex: Cpt_Splunky" id="comment-username" type="text" class="validate">
-            <label for="first_name">Username</label>
+            <div class="input-field col s10 offset-s1 m6">
+              <select id="post-category" class="indigo-text">
+                <option value="Music">Music</option>
+                <option class="indigo-text" value="Books">Books</option>
+                <option class="indigo-text" value="Movies">Movies</option>
+                <option class="indigo-text" value="Video Games">Video Games</option>
+              </select>
+              <label>Select Category</label>
+            </div>
           </div>
           <div class="row">
             <form class="col s12">
+              <!-- <h5 for="first_name" class="indigo-text"> Post Title </h5>  -->
               <div class="row">
                 <div class="input-field col s12">
-                  <textarea id="comment-content" class="materialize-textarea"></textarea>
-                  <label for="textarea1">Textarea</label>
+                  <textarea id="post-title" class="materialize-textarea"></textarea>
+                  <label for="post-title">Title your post. I'm NSearch of:</label>
                 </div>
-              </form>
+              </div>
+            </form>
+          </div>
+          <div class="row">
+            <form class="col s12">
+              <div class="row lessMargin">
+                <div class="input-field col s12">
+                  <textarea id="post-content" class="materialize-textarea"></textarea>
+                  <label for="post-content">Give us the details:</label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="row textRight">Looking for something?</div>
+          <!-- api button -->
+          <div class="apiButtonClass">
+            <div class="fixed-action-btn click-to-toggle direction-top direction-left button-height">
+              <a class="btn-floating btn-large red">
+                <i class=" large material-icons">search</i>
+              </a>
+              <ul>
+                <li>
+                  <a id="musicApi" class="btn-floating red tooltipped" data-tooltip="Search a Song"
+                    style="opacity: 0; transform: scale(0.4) translateY(0px) translateX(40px);">
+                    <i class="material-icons">music_note</i>
+                  </a>
+                </li>
+                <li>
+                  <a class="btn-floating yellow darken-1 tooltipped" data-tooltip="Find a Video Game"
+                    style="opacity: 0; transform: scale(0.4) translateY(0px) translateX(40px);">
+                    <i class="material-icons">games</i>
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
+          <!-- hidden div for api data -->
+          <div class="hiddenDiv"></div>
+          <!-- end of api button -->
+        </div>
         <div class="modal-footer">
-          <div class=row>
+          <div class="row">
             <div class="col s12 center-align">
-              <button href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo">Cancel</button>
-              <button type="button" href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo" onclick="createNewComment()" >Comment</button>
+              <button href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo">
+                Cancel
+              </button>
+              <button type="button" href="#!" class="modal-close waves-effect waves-green btn-flat indigo"
+                id="push-to-database" onclick="pushPostToDatabase()">
+                Create
+              </button>
             </div>
           </div>
         </div>
@@ -241,34 +144,31 @@
 
     <!-- Modal Trigger -->
     <div id="modal1-button">
-      <a
-        class="btn-floating waves-effect waves-red modal-trigger hoverable tooltipped red"
-        data-position="left"
-        data-tooltip="Create a new Post"
-        href="#createAPost-modal"
-        id="makeAPost-btn"
-      >
-        <i class="small material-icons">add</i></a
-      >
+      <a class="btn-floating waves-effect waves-red modal-trigger hoverable tooltipped red" data-position="left"
+        data-tooltip="Create a new Post" href="#createAPost-modal" id="makeAPost-btn">
+        <i class="small material-icons">add</i></a>
     </div>
-  </body>
 
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
 
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-database.js"></script>
-  <!-- TODO: Add SDKs for Firebase products that you want to use
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-  <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-analytics.js"></script>
 
-  <!-- music js file -->
-  <script src="assets/javascript/music.js"></script>
-  <!-- gaming js file -->
-  <script src="assets/javascript/gaming.js"></script>
-  <!-- reading js file -->
-  <script src="assets/javascript/reading.js"></script>
-  <script src="assets/javascript/homepage.js"></script>
+<!-- music js file -->
+<script src="assets/javascript/music.js"></script>
+<!-- gaming js file -->
+<script src="assets/javascript/gaming.js"></script>
+<!-- reading js file -->
+<script src="assets/javascript/reading.js"></script>
+<script src="assets/javascript/homepage.js"></script>
+
 </html>
