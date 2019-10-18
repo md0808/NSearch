@@ -81,8 +81,6 @@ database.ref(booksPostsRef).on("child_added", function (data) {
 
 //this is the function the pushes the post info the the correct db category
 function pushPostToDatabase() {
-  //var newPostRef = "";
-
   var post_username = $("#post-username")
     .val()
     .trim();
@@ -143,13 +141,6 @@ function pushPostToDatabase() {
   })
 }
 
-//This function creates the UI Post Elements
-// function createNewPost(postID) {
-//   var newPost_Username = "";
-//   var newPost_Category = "";
-//   var newPost_Title = "";
-//   var newPost_Content = "";
-// }
 
 function showPostUI(data) {
   var newPost_Username = data.val().postUsername;
@@ -157,9 +148,6 @@ function showPostUI(data) {
   var newPost_Title = data.val().postTitle;
   var newPost_Content = data.val().postContent;
   var newPost_ID = data.val().postid;
-
-  // console.log(data.val());
-  console.log(newPost_ID);
 
   var onclickFunction = "$('#postReply-modal').modal('open');";
 
@@ -210,12 +198,8 @@ function showPostUI(data) {
   $(".reply-modal-btn").attr("onclick", onclickFunction);
 
   $("#reply-modal-btn").on("click", function () {
-    console.log("comment btn clicked");
-
     getPostID = $(this).attr("data-postid");
     getPostCategory = $(this).attr("data-postCategory");
-
-    console.log("postid: " + getPostID + " postcategory: " + getPostCategory);
   });
 }
 
@@ -225,12 +209,8 @@ function createNewComment() {
   var comment_username = $("#comment-username").val().trim();
   var comment = $("#comment-content").val().trim();
 
-  console.log("user commented: " + comment_username + " comment: " + comment + " on post: " + getPostID);
-
   var postCategory = getPostCategory.toLowerCase();
   var postCommentRef = "/posts/" + postCategory + "/" + getPostID + "/" + "comments";
-  
-  console.log(postCommentRef);
 
   database.ref(postCommentRef).set({
     commentUsername: comment_username,
