@@ -40,26 +40,24 @@ $(".brand-logo").on("click", function() {
   location.reload();
 });
 
-$('.modal').modal();
+$(".modal").modal();
 
 //Create new post modal shows
 $("#makeAPost-btn").on("click", function() {
-  $("#createAPost-modal").modal('open');
+  $("#createAPost-modal").modal("open");
 });
 
 $("#reply-modal-btn").on("click", function() {
-  $("#postReply-modal").modal('open');
+  $("#postReply-modal").modal("open");
 });
 
-$("#push-to-database").on("click", function (){
+$("#push-to-database").on("click", function() {
   $("#post-username").val("");
   $("#post-title").val("");
   $("#post-content").val("");
-
-})
+});
 
 //=====================================================
-
 
 //Music
 database.ref(musicPostsRef).on("child_added", function(data) {
@@ -139,8 +137,8 @@ function pushPostToDatabase() {
   //post comments are getting set here
   database.ref(commentsRef).set({
     commentUsername: "",
-    comment:""
-  })
+    comment: ""
+  });
 
   createNewPost(postID);
 }
@@ -230,14 +228,13 @@ function musicSort() {
 }
 
 $(".music-button").click(function() {
-  $("#mainContent").hide()
+  $("#mainContent").hide();
   $("#music-activity-div").show();
-  $("#category-name").text("Music")
-  console.log("Music button pushed.")
+  $("#category-name").text("Music");
+  console.log("Music button pushed.");
 
   musicSort();
 });
-
 
 function videogamesSort() {
   // sort through firebase for books category posts / list
@@ -259,65 +256,71 @@ function videogamesSort() {
 }
 
 $(".videogames-button").click(function() {
-  $("#mainContent").hide()
+  $("#mainContent").hide();
   $("#videogames-activity-div").show();
-  $("#category-name").text("Video Games")
-  console.log("video games button pushed.")
+  $("#category-name").text("Video Games");
+  console.log("video games button pushed.");
   videogamesSort();
 });
 
 function booksSort() {
   // sort through firebase for books category posts / list
   var query = firebase.database().ref("/posts/books");
-  
+
   query.once("value").then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
       // title of each instance of book
       var key = childSnapshot.key;
       console.log(key);
-  
+
       // data within each instance
       var childData = childSnapshot;
       console.log(childData.val());
-  
+
       showPostUI(childData, key);
     });
   });
-  }
-  
-  $(".books-button").click(function() {
-    $("#mainContent").hide()
-    $("#books-activity-div").show();
-    $("#category-name").text("Books")
-    console.log("books button pushed.")
-    booksSort();
-  });
-  
+}
 
+$(".books-button").click(function() {
+  $("#mainContent").hide();
+  $("#books-activity-div").show();
+  $("#category-name").text("Books");
+  console.log("books button pushed.");
+  booksSort();
+});
 
 function moviesSort() {
-// sort through firebase for movies category posts / list
-var query = firebase.database().ref("/posts/movies");
+  // sort through firebase for movies category posts / list
+  var query = firebase.database().ref("/posts/movies");
 
-query.once("value").then(function(snapshot) {
-  snapshot.forEach(function(childSnapshot) {
-    // title of each instance of movies 
-    var key = childSnapshot.key;
-    console.log(key);
+  query.once("value").then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      // title of each instance of movies
+      var key = childSnapshot.key;
+      console.log(key);
 
-    // data within each instance
-    var childData = childSnapshot;
-    console.log(childData.val());
+      // data within each instance
+      var childData = childSnapshot;
+      console.log(childData.val());
 
-    showPostUI(childData, key);
+      showPostUI(childData, key);
+    });
   });
-});
 }
 
 $(".movies-button").click(function() {
-$("#mainContent").hide()
-$("#movies-activity-div").show();
-console.log("movies button pushed.")
-$("#category-name").text("Movies")
-moviesSort();
+  $("#mainContent").hide();
+  $("#movies-activity-div").show();
+  console.log("movies button pushed.");
+  $("#category-name").text("Movies");
+  moviesSort();
+});
+
+// javascript for materialize api button
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.fixed-action-btn');
+  var instances = M.FloatingActionButton.init(elems, {
+    direction: 'left'
+  });
 });
