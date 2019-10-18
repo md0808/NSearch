@@ -115,17 +115,17 @@
     <!-- Reply  Modal Structure -->
     <div id="postReply-modal" class="modal">
       <div class="modal-content">
-        <h4 class="center-align indigo-text bold">Reply to Post</h4>
+        <h4 class="center-align indigo-text bold">Comment to Post</h4>
         <div class="row">
           <div class="input-field col m6 s10 offset-s1">
-            <input placeholder="Ex: Cpt_Splunky" id="post-username" type="text" class="validate">
+            <input placeholder="Ex: Cpt_Splunky" id="comment-username" type="text" class="validate">
             <label for="first_name">Username</label>
           </div>
           <div class="row">
             <form class="col s12">
               <div class="row">
                 <div class="input-field col s12">
-                  <textarea id="textarea1" class="materialize-textarea"></textarea>
+                  <textarea id="comment-content" class="materialize-textarea"></textarea>
                   <label for="textarea1">Textarea</label>
                 </div>
               </div>
@@ -136,8 +136,7 @@
           <div class=row>
             <div class="col s12 center-align">
               <button href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo">Cancel</button>
-              <button type="button" href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo"
-                onclick="createReply()">Leave Reply</button>
+              <button type="button" href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo" onclick="createNewComment()" >Comment</button>
             </div>
           </div>
         </div>
