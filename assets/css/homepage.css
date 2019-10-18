@@ -97,4 +97,46 @@ label:active {
   }
 
 
+/* api displays */
+.apiButtonClass {
+    position: relative; 
+    height: 70px;
+}
 
+.button-height {
+    position: absolute;
+    right: 10px;
+    min-height: 60px;
+}
+
+.textRight {
+    text-align: right;
+    font-family: 'Archivo Narrow', sans-serif;
+    color: rgba(0, 0, 0, 0.678);
+    margin-bottom: 30px;
+    margin-top: -30px;
+}
+
+.lessMargin {
+    margin-bottom: 0;
+}
+
+.hiddenDiv {
+    height: 200px;
+    font-family: 'Archivo Narrow', sans-serif;
+    overflow: hidden;
+}
+
+.musicApiDiv{
+    border: #005DAB solid 2px;
+    height: 200px;
+}
+
+.minorSpacing {
+    margin-left: 10px;
+}
+
+.musicApiResult {
+    overflow: hidden;
+}
+/* api displays */
