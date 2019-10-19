@@ -172,7 +172,7 @@ function showPostUI(data) {
     "<span class='num-favories'>32</span> &nbsp; <a href='#'><i class='tiny material-icons'>favorite" +
     "</i></a>" +
     "<a id='reply-modal-btn' class='reply-modal-btn' href='#postReply-modal' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>Comment</a>" +
-    "<a href='#' class='view-replies' data-postID='test'>View Comments </a>" +
+    "<a href='#' id='view-reply-btn' class='view-replies' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>View Comments </a>" +
     "</div>" +
     "</div>"
   );
@@ -196,6 +196,13 @@ function showPostUI(data) {
   $("#reply-modal-btn").on("click", function () {
     getPostID = $(this).attr("data-postid");
     getPostCategory = $(this).attr("data-postCategory");
+  });
+
+  $("#view-reply-btn").on("click", function () {
+    getPostID = $(this).attr("data-postid");
+    getPostCategory = $(this).attr("data-postCategory");
+
+    showComments();
   });
 }
 
@@ -221,7 +228,33 @@ function createNewComment() {
   database.ref(postCommentRef).set({
     allComments: get_allComments + newComment
   })
+}
 
+function showComments(){
+  console.log("ID: " + getPostID + " Category: " + getPostCategory);
+  var newPostCategory = getPostCategory.toLowerCase();
+  newPostCategory = newPostCategory.replace(/\s/g, '');
+
+  var newPostRef = "/posts/" + newPostCategory + "/" + getPostID + "/comments";
+  console.log("postref: " + newPostRef);
+
+  var postComments = "";
+  var seperatedComments = [];
+
+  database.ref(newPostRef).on("value", function(data){
+    postComments = data.val().allComments;
+
+    seperatedComments = postComments.split(',');
+
+    for(var i = 0; i < seperatedComments.length; i++){
+      if(seperatedComments[i] !== ""){
+        console.log(seperatedComments[i]);
+        console.log(i);
+      }
+    }
+
+    console.log("post comments: " + postComments);
+  })
 }
 
 function musicSort() {
