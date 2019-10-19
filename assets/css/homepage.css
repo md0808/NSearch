@@ -141,9 +141,9 @@ label:active {
 }
 /* end of music api displays */
 
-/* gaming api displays */
+/* movies api displays */
 
-.gamingApiDiv {
+.moviesApiDiv {
     border: #005DAB solid 2px;
     height: 400px;
 }
@@ -153,7 +153,18 @@ label:active {
     margin-top: 30px;
 }
 
-.gamingApiSubmit {
+.moviesApiSubmit {
     margin-top: 20px;
 }
-/* end of gaming api displays */
+
+.moviesTitleSpacing {
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.middleSpacing {
+    margin-top: 13px;
+    margin-left: 10px;
+}
+/* end of movies api displays */
