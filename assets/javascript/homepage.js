@@ -124,6 +124,8 @@ function pushPostToDatabase() {
 
   var commentsRef = newPostRef + "/comments";
 
+  var likesRef = newPostRef + "/likes";
+
   //post info is getting set here
   database.ref(newPostRef).set({
     postTitle: post_title,
@@ -137,6 +139,10 @@ function pushPostToDatabase() {
   database.ref(commentsRef).set({
     allComments: ""
   });
+
+  database.ref(likesRef).set({
+    numLikes: 0
+  })
 }
 
 
@@ -171,7 +177,7 @@ function showPostUI(data) {
       "</p>" +
       "</div>" +
     "<div class='card-action'>" +
-    "<span class='num-favories'>32</span> &nbsp; <a href='#'><i class='tiny material-icons'>favorite" +
+    "<span class='num-favories' id='num-likes-span" + newPost_ID + "'>0</span> &nbsp; <a href='#'><i id='like-button-" + newPost_ID + "' data-postID='" + newPost_ID +  "' data-postCategory ='" + newPost_Category + "' class='tiny material-icons'>favorite" +
     "</i></a>" +
     "<a id='reply-modal-btn' class='reply-modal-btn' href='#postReply-modal' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>Comment</a>" +
     "<a href='#' id='view-reply-btn' class='view-replies' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>View Comments </a>" +
@@ -203,6 +209,7 @@ function showPostUI(data) {
     getPostCategory = $(this).attr("data-postCategory");
   });
 
+
   $("#view-reply-btn").on("click", function () {
 
     if (areCommentsShowing == false){
@@ -221,8 +228,38 @@ function showPostUI(data) {
       $("#comments-" + getPostID).hide();
       $("#comments-" + getPostID).text("")
     }
+    
   });
+
+  $("#like-button-" + newPost_ID).on("click", function(){
+    console.log("heart heart")
+    getPostID =$(this).attr("data-postid");
+    getPostCategory= $(this).attr("data-postCategory");
+    addLike();
+
+  })
 }
+
+function addLike() {
+
+  var newPostCategory = getPostCategory.toLowerCase();
+  newPostCategory = newPostCategory.replace(/\s/g, '');
+
+  var newLikeRef = "/posts/" + newPostCategory + "/" + getPostID + "/likes";
+  var numberLikes = 0;
+  database.ref(newLikeRef).on("value", function(data) {
+    numberLikes = data.val().numLikes;
+  })
+  numberLikes++
+  database.ref(newLikeRef).set({
+    numLikes: numberLikes
+  });
+ 
+  $("#num-likes-span" + getPostID).text(numberLikes);
+  console.log("#num-likes-span" + getPostID);
+
+}
+
 
 function createNewComment() {
   console.log("create a comment on: " + getPostID);
@@ -249,12 +286,10 @@ function createNewComment() {
 }
 
 function showComments(){
-  console.log("ID: " + getPostID + " Category: " + getPostCategory);
   var newPostCategory = getPostCategory.toLowerCase();
   newPostCategory = newPostCategory.replace(/\s/g, '');
 
   var newPostRef = "/posts/" + newPostCategory + "/" + getPostID + "/comments";
-  console.log("postref: " + newPostRef);
 
   var postComments = "";
   var seperatedComments = [];
@@ -268,15 +303,12 @@ function showComments(){
 
     for(var i = 0; i < seperatedComments.length; i++){
       if(seperatedComments[i] !== ""){ 
-        console.log(seperatedComments[i]);
         var newComment = $("<h5>" +seperatedComments[i].replace(/[{()}]/g, '') + "</h5>")
-        console.log(i);
         $("#comments-" + getPostID).append(newComment);
 
       }
     }
 
-    console.log("post comments: " + postComments);
   })
 }
 
