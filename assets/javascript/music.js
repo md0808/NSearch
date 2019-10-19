@@ -31,7 +31,6 @@ var search;
               "<div class='minorSpacing' id='apiShareLink'></div>" +
             "</div>" +
         "</div>" 
-        
       )
     );
 
