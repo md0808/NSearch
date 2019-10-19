@@ -133,8 +133,7 @@ function pushPostToDatabase() {
 
   //post comments are getting set here
   database.ref(commentsRef).set({
-    commentUsername: "",
-    comment: ""
+    allComments: ""
   });
 }
 
@@ -209,9 +208,16 @@ function createNewComment() {
   var postCategory = getPostCategory.toLowerCase();
   var postCommentRef = "/posts/" + postCategory + "/" + getPostID + "/" + "comments";
 
+  var get_allComments = "";
+  var newComment = "{" + comment_username + ": " + comment + "},";
+  console.log(newComment);
+
+  database.ref(postCommentRef).on("value", function(data) {
+    get_allComments = data.val().allComments
+  });
+
   database.ref(postCommentRef).set({
-    commentUsername: comment_username,
-    comment: comment
+    allComments: get_allComments + newComment
   })
 
 }
