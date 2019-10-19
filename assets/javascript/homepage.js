@@ -25,6 +25,8 @@ var moviesPostsRef = "/posts/movies";
 var musicPostsRef = "/posts/music";
 var videoGamesPostsRef = "/posts/videogames";
 
+var areCommentsShowing = false;
+
 //Materialize========================================
 $(document).ready(function () {
   $(".dropdown-trigger").dropdown();
@@ -175,7 +177,7 @@ function showPostUI(data) {
     "<a href='#' id='view-reply-btn' class='view-replies' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>View Comments </a>" +
     "</div>" +
     "<div class='comments-div' id='comments-" + newPost_ID + "'>" +
-    "<a class='hide-comments btn-flat' data-postID='test'>Hide Comments </a>" +
+    "<p>dfsd</p>" +
     "</div>" +
     "</div>"
   );
@@ -202,12 +204,23 @@ function showPostUI(data) {
   });
 
   $("#view-reply-btn").on("click", function () {
-    getPostID = $(this).attr("data-postid");
-    getPostCategory = $(this).attr("data-postCategory");
 
-    $("#comments-" + getPostID).show();
+    if (areCommentsShowing == false){
+      getPostID = $(this).attr("data-postid");
+      getPostCategory = $(this).attr("data-postCategory");
+      $("#comments-" + getPostID).show();
+      showComments();
+      $("#view-reply-btn").text("Hide Comments");
+      areCommentsShowing = true;
 
-    showComments();
+    }
+    else {
+      areCommentsShowing = false;
+      console.log("else statement")
+      $("#view-reply-btn").text("View Comments");
+      $("#comments-" + getPostID).hide();
+      $("#comments-" + getPostID).text("")
+    }
   });
 }
 
@@ -248,13 +261,18 @@ function showComments(){
 
   database.ref(newPostRef).on("value", function(data){
     postComments = data.val().allComments;
+    $("#comments-" + getPostID).text("")
+
 
     seperatedComments = postComments.split(',');
 
     for(var i = 0; i < seperatedComments.length; i++){
-      if(seperatedComments[i] !== ""){
+      if(seperatedComments[i] !== ""){ 
         console.log(seperatedComments[i]);
+        var newComment = $("<h5>" +seperatedComments[i].replace(/[{()}]/g, '') + "</h5>")
         console.log(i);
+        $("#comments-" + getPostID).append(newComment);
+
       }
     }
 
