@@ -149,30 +149,33 @@ function showPostUI(data) {
 
   var newPost = $(
     "<div class='card indigo darken-1'>" +
-    "<div class='card-content white-text'>" +
-    "<div class='card-header'>" +
-    "<a href='#'><span>" +
-    newPost_Username +
-    "</span></a></br>" +
-    "<a href='#'><span>" +
-    newPost_Category +
-    "</span></a>" +
-    "<hr>" +
-    "</div>" +
-    "<span class='card-title'>" +
-    "<h5 class='center-align'>" +
-    newPost_Title +
-    "</h5>" +
-    "</span>" +
-    "<p>" +
-    newPost_Content +
-    "</p>" +
-    "</div>" +
+      "<div class='card-content white-text'>" +
+        "<div class='card-header'>" +
+          "<a href='#'><span>" +
+            newPost_Username +
+          "</span></a></br>" +
+          "<a href='#'><span>" +
+            newPost_Category +
+          "</span></a>" +
+          "<hr>" +
+        "</div>" +
+      "<span class='card-title'>" +
+      "<h5 class='center-align'>" +
+        newPost_Title +
+      "</h5>" +
+      "</span>" +
+      "<p>" +
+        newPost_Content +
+      "</p>" +
+      "</div>" +
     "<div class='card-action'>" +
     "<span class='num-favories'>32</span> &nbsp; <a href='#'><i class='tiny material-icons'>favorite" +
     "</i></a>" +
     "<a id='reply-modal-btn' class='reply-modal-btn' href='#postReply-modal' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>Comment</a>" +
     "<a href='#' id='view-reply-btn' class='view-replies' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>View Comments </a>" +
+    "</div>" +
+    "<div class='comments-div' id='comments-" + newPost_ID + "'>" +
+    "<a class='hide-comments btn-flat' data-postID='test'>Hide Comments </a>" +
     "</div>" +
     "</div>"
   );
@@ -201,6 +204,8 @@ function showPostUI(data) {
   $("#view-reply-btn").on("click", function () {
     getPostID = $(this).attr("data-postid");
     getPostCategory = $(this).attr("data-postCategory");
+
+    $("#comments-" + getPostID).show();
 
     showComments();
   });
