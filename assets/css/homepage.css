@@ -167,4 +167,7 @@ label:active {
     margin-top: 13px;
     margin-left: 10px;
 }
-/* end of movies api displays */
+
+.comments-div{
+    display: none;
+}

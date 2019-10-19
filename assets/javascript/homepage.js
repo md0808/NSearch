@@ -25,6 +25,8 @@ var moviesPostsRef = "/posts/movies";
 var musicPostsRef = "/posts/music";
 var videoGamesPostsRef = "/posts/videogames";
 
+var areCommentsShowing = false;
+
 //Materialize========================================
 $(document).ready(function () {
   $(".dropdown-trigger").dropdown();
@@ -149,30 +151,33 @@ function showPostUI(data) {
 
   var newPost = $(
     "<div class='card indigo darken-1'>" +
-    "<div class='card-content white-text'>" +
-    "<div class='card-header'>" +
-    "<a href='#'><span>" +
-    newPost_Username +
-    "</span></a></br>" +
-    "<a href='#'><span>" +
-    newPost_Category +
-    "</span></a>" +
-    "<hr>" +
-    "</div>" +
-    "<span class='card-title'>" +
-    "<h5 class='center-align'>" +
-    newPost_Title +
-    "</h5>" +
-    "</span>" +
-    "<p>" +
-    newPost_Content +
-    "</p>" +
-    "</div>" +
+      "<div class='card-content white-text'>" +
+        "<div class='card-header'>" +
+          "<a href='#'><span>" +
+            newPost_Username +
+          "</span></a></br>" +
+          "<a href='#'><span>" +
+            newPost_Category +
+          "</span></a>" +
+          "<hr>" +
+        "</div>" +
+      "<span class='card-title'>" +
+      "<h5 class='center-align'>" +
+        newPost_Title +
+      "</h5>" +
+      "</span>" +
+      "<p>" +
+        newPost_Content +
+      "</p>" +
+      "</div>" +
     "<div class='card-action'>" +
     "<span class='num-favories'>32</span> &nbsp; <a href='#'><i class='tiny material-icons'>favorite" +
     "</i></a>" +
     "<a id='reply-modal-btn' class='reply-modal-btn' href='#postReply-modal' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>Comment</a>" +
-    "<a href='#' class='view-replies' data-postID='test'>View Comments </a>" +
+    "<a href='#' id='view-reply-btn' class='view-replies' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>View Comments </a>" +
+    "</div>" +
+    "<div class='comments-div' id='comments-" + newPost_ID + "'>" +
+    "<p>dfsd</p>" +
     "</div>" +
     "</div>"
   );
@@ -196,6 +201,26 @@ function showPostUI(data) {
   $("#reply-modal-btn").on("click", function () {
     getPostID = $(this).attr("data-postid");
     getPostCategory = $(this).attr("data-postCategory");
+  });
+
+  $("#view-reply-btn").on("click", function () {
+
+    if (areCommentsShowing == false){
+      getPostID = $(this).attr("data-postid");
+      getPostCategory = $(this).attr("data-postCategory");
+      $("#comments-" + getPostID).show();
+      showComments();
+      $("#view-reply-btn").text("Hide Comments");
+      areCommentsShowing = true;
+
+    }
+    else {
+      areCommentsShowing = false;
+      console.log("else statement")
+      $("#view-reply-btn").text("View Comments");
+      $("#comments-" + getPostID).hide();
+      $("#comments-" + getPostID).text("")
+    }
   });
 }
 
@@ -221,7 +246,38 @@ function createNewComment() {
   database.ref(postCommentRef).set({
     allComments: get_allComments + newComment
   })
+}
 
+function showComments(){
+  console.log("ID: " + getPostID + " Category: " + getPostCategory);
+  var newPostCategory = getPostCategory.toLowerCase();
+  newPostCategory = newPostCategory.replace(/\s/g, '');
+
+  var newPostRef = "/posts/" + newPostCategory + "/" + getPostID + "/comments";
+  console.log("postref: " + newPostRef);
+
+  var postComments = "";
+  var seperatedComments = [];
+
+  database.ref(newPostRef).on("value", function(data){
+    postComments = data.val().allComments;
+    $("#comments-" + getPostID).text("")
+
+
+    seperatedComments = postComments.split(',');
+
+    for(var i = 0; i < seperatedComments.length; i++){
+      if(seperatedComments[i] !== ""){ 
+        console.log(seperatedComments[i]);
+        var newComment = $("<h5>" +seperatedComments[i].replace(/[{()}]/g, '') + "</h5>")
+        console.log(i);
+        $("#comments-" + getPostID).append(newComment);
+
+      }
+    }
+
+    console.log("post comments: " + postComments);
+  })
 }
 
 function musicSort() {
