@@ -157,3 +157,7 @@ label:active {
     margin-top: 20px;
 }
 /* end of gaming api displays */
+
+.comments-div{
+    display: none;
+}
