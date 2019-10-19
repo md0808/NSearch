@@ -206,11 +206,13 @@ function createNewComment() {
   var comment = $("#comment-content").val().trim();
 
   var postCategory = getPostCategory.toLowerCase();
-  var postCommentRef = "/posts/" + postCategory + "/" + getPostID + "/" + "comments";
 
   var get_allComments = "";
   var newComment = "{" + comment_username + ": " + comment + "},";
   console.log(newComment);
+
+  postCategory = postCategory.replace(/\s/g, '');
+  var postCommentRef = "/posts/" + postCategory + "/" + getPostID + "/" + "comments";
 
   database.ref(postCommentRef).on("value", function(data) {
     get_allComments = data.val().allComments
