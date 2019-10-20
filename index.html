@@ -62,10 +62,10 @@
 
       <!-- Modal Structure -->
       <div id="createAPost-modal" class="modal modal-fixed-footer">
-        <div class="modal-content container">
+        <div class="modal-content container" creatPostContainer>
           <h4 class="center-align indigo-text bold">Create A New Post</h4>
           <div class="row">
-            <div class="input-field col m6 s10 offset-s1">
+            <div class="input-field col m6 s10 offset-s1 enter-rules">
               <input placeholder="Ex: Cpt_Splunky" id="post-username" type="text" class="validate" />
               <label for="post-username">Username</label>
             </div>
@@ -79,8 +79,8 @@
               <label>Select Category</label>
             </div>
           </div>
-          <div class="row">
-            <form class="col s12">
+          <div class="row enter-rules">
+            <form class="col s12 ">
               <div class="row">
                 <div class="input-field col s12">
                   <textarea id="post-title" class="materialize-textarea"></textarea>
@@ -89,7 +89,7 @@
               </div>
             </form>
           </div>
-          <div class="row">
+          <div class="row enter-rules">
             <form class="col s12">
               <div class="row lessMargin">
                 <div class="input-field col s12">
@@ -129,11 +129,11 @@
         <div class="modal-footer">
           <div class="row">
             <div class="col s12 center-align">
-              <button href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo">
+              <button href="#!" class="modal-close waves-effect waves-light hoverable btn indigo">
                 Cancel
               </button>
-              <button type="button" href="#!" class="modal-close waves-effect waves-green btn-flat indigo"
-                id="push-to-database" onclick="pushPostToDatabase()">
+              <button type="button" href="#!" class="modal-close waves-effect waves-light hoverable btn indigo"
+                id="push-to-database">
                 Create
               </button>
             </div>
@@ -144,7 +144,7 @@
 
         <!-- Reply  Modal Structure -->
         <div id="postReply-modal" class="modal">
-            <div class="modal-content">
+            <div class="modal-content enter-rules-comments">
               <h4 class="center-align indigo-text bold">Comment to Post</h4>
               <div class="row">
                 <div class="input-field col m6 s10 offset-s1">
@@ -156,7 +156,7 @@
                     <div class="row">
                       <div class="input-field col s12">
                         <textarea id="comment-content" class="materialize-textarea"></textarea>
-                        <label for="textarea1">Textarea</label>
+                        <label for="textarea1">Leave a comment</label>
                       </div>
                     </div>
                   </form>
@@ -166,7 +166,7 @@
                 <div class=row>
                   <div class="col s12 center-align">
                     <button href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo">Cancel</button>
-                    <button type="button" href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo" onclick="createNewComment()" >Comment</button>
+                    <button type="button" id="create-comment-btn" href="#!" class="modal-close waves-effect waves-indigo btn-flat indigo">Comment</button>
                   </div>
                 </div>
               </div>
@@ -174,13 +174,28 @@
           </div>
         </div>
 
-    <!-- Modal Trigger -->
-    <div id="modal1-button">
-      <a class="btn-floating waves-effect waves-red modal-trigger hoverable tooltipped red" data-position="left"
-        data-tooltip="Create a new Post" href="#createAPost-modal" id="makeAPost-btn">
-        <i class="small material-icons">add</i></a>
-    </div>
-</body>
+
+        
+
+                <!--  Text-check Modal Structure -->
+                <div id="text-check-modal" class="modal">
+                  <div class="modal-content">
+                    <h4 class="indigo-text center-align">Complete the form to make a post.</h4>
+                  </div>
+                  <div class="modal-footer center-align">
+                    <a href="#" class="modal-close waves-effect waves-light btn-flat indigo ">ok</a>
+                  </div>
+                </div>
+
+
+
+                  <!-- Modal Trigger -->
+                  <div id="create-post-btn-div">
+                    <a class="btn-floating waves-effect waves-red modal-trigger hoverable tooltipped red" data-position="left"
+                      data-tooltip="Create a new Post" href="#createAPost-modal" id="makeAPost-btn">
+                      <i class="small material-icons">add</i></a>
+                  </div>
+              </body>
 
 
 <!-- Compiled and minified JavaScript -->

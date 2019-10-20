@@ -35,7 +35,7 @@ nav{
     font-weight: bolder;
 }
 
-#modal1-button {
+#create-post-btn-div {
     position: fixed;
     bottom: 40px; 
     right: 40px;
@@ -74,10 +74,7 @@ nav{
 .dropdown-content {
     color: #1b237e!important;
 }
-.dropdown-content li {
-    color: #1b237e!important;
 
-}
 input.select-dropdown {
     color: #1b237e!important;
 }
@@ -87,14 +84,17 @@ input:focus {
     box-shadow: 0 1px 0 0 #1b237e;;
  }
 
+.comments-div{
+    display: none;
+    padding: 18px 18px 18px 18px;
+    color: white;
+}
+
+
 label:active {
     color: #005DAB;
   }
 
-
-  @media screen and (max-width: 990px) {
-
-  }
 
 
 /* music api displays */
@@ -168,6 +168,4 @@ label:active {
     margin-left: 10px;
 }
 
-.comments-div{
-    display: none;
-}
+
