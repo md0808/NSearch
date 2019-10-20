@@ -27,7 +27,6 @@ var videoGamesPostsRef = "/posts/videogames";
 
 var areCommentsShowing = false;
 
-//Materialize========================================
 $(document).ready(function () {
   $(".dropdown-trigger").dropdown();
 });
@@ -46,18 +45,122 @@ $(".brand-logo").on("click", function () {
 
 $(".modal").modal();
 
-//Create new post modal shows
+//variable to text if user has entered text into forms
+var areTextAreasFull = false;
+
+
 $("#makeAPost-btn").on("click", function() {
   $("#createAPost-modal").modal("open");
 });
 
-$("#push-to-database").on("click", function() {
-  $("#post-username").val("");
-  $("#post-title").val("");
-  $("#post-content").val("");
+
+//allows users to press enter as any entry only if text exists in forms
+$(".enter-rules").keypress(function (e) {
+  if (e.which == '13' ) {
+    checkTextAreas(areTextAreasFull);
+    
+    if (areTextAreasFull == true){
+      pushPostToDatabase();
+
+      $("#postReply-modal").modal("close");
+      console.log("this modal should close")
+      $("#post-username").val("");
+      $("#post-title").val("");
+      $("#post-content").val("");
+
+    } else {
+      $("#text-check-modal").modal("open");
+    }
+  }
 });
 
-//=====================================================
+function checkTextAreas () {
+  //gets values from input
+var textInput1= $("#post-username").val().trim();
+var textInput2= $("#post-title").val().trim();
+var textInput3= $("#post-content").val().trim();
+  //checks to make sure the inputs have some text
+if (textInput1.trim().length == 0 
+    || textInput2.trim().length == 0 
+    || textInput3.trim().length == 0){
+    areTextAreasFull = false;
+    $("#text-check-modal").modal("open");
+} else {
+  areTextAreasFull = true;
+}
+}
+
+
+$("#push-to-database").on("click", function() {
+  checkTextAreas ()
+    if (areTextAreasFull == true){
+      pushPostToDatabase();
+      $("#createAPost-modal").modal("close");
+      console.log("this modal should close")
+      $("#post-username").val("");
+      $("#post-title").val("");
+      $("#post-content").val("");
+
+  } else {
+    $("#text-check-modal").modal("open");
+  }
+});
+
+
+$(".reply-modal-btn").on("click", function() {
+  $("#postReply-modal").modal("open");
+});
+
+
+//regulates enter key on the comment modal
+$(".enter-rules-comments").keypress(function (e) {
+  if (e.which == '13' ) {
+    console.log("enter was pressed")
+    checkTextAreasComments(areTextAreasFull);
+      if (areTextAreasFull == true){
+        createNewComment();
+        $("#createAPost-modal").modal("close");
+        console.log("this modal should  also close")
+
+        $("#comment-username").val("");
+        $("#comment-content").val("");
+
+      } else {
+        $("#text-check-modal").modal("open");
+      }
+  }
+});
+
+function checkTextAreasComments () {
+  //gets values from inputs for reply modal
+  var textInput1= $("#comment-username").val().trim();
+  var textInput2= $("#comment-content").val().trim();
+  //checks to make sure the inputs have some text
+  if (textInput1.trim().length == 0 || 
+      textInput2.trim().length == 0 ){
+        areTextAreasFull = false;
+        $("#text-check-modal").modal("open");
+  } else {
+    areTextAreasFull = true;
+  }
+}
+
+$("#create-comment-btn").on("click", function() {
+  checkTextAreasComments ()
+    if (areTextAreasFull == true){
+      createNewComment();
+      $("#postReply-modal").modal("close");
+      $("#post-username").val("");
+      $("#post-title").val("");
+      $("#post-content").val("");
+
+  } else {
+    $("#text-check-modal").modal("open");
+  }
+});
+
+
+
 
 //Music
 database.ref(musicPostsRef).on("child_added", function (data) {
@@ -223,7 +326,6 @@ function showPostUI(data) {
     }
     else {
       areCommentsShowing = false;
-      console.log("else statement")
       $("#view-reply-btn").text("View Comments");
       $("#comments-" + getPostID).hide();
       $("#comments-" + getPostID).text("")
@@ -232,28 +334,30 @@ function showPostUI(data) {
   });
 
   $("#like-button-" + newPost_ID).on("click", function(){
-    console.log("heart heart")
     getPostID =$(this).attr("data-postid");
     getPostCategory= $(this).attr("data-postCategory");
     addLike();
 
   })
 }
+var newPostCategory = getPostCategory.toLowerCase();
+newPostCategory = newPostCategory.replace(/\s/g, '');
+var newLikeRef = "/posts/" + newPostCategory + "/" + getPostID + "/likes";
 
-function addLike() {
-
-  var newPostCategory = getPostCategory.toLowerCase();
-  newPostCategory = newPostCategory.replace(/\s/g, '');
-
-  var newLikeRef = "/posts/" + newPostCategory + "/" + getPostID + "/likes";
-  var numberLikes = 0;
+var numberLikes = 0;
   database.ref(newLikeRef).on("value", function(data) {
     numberLikes = data.val().numLikes;
   })
-  numberLikes++
   database.ref(newLikeRef).set({
     numLikes: numberLikes
   });
+  function addLike() {
+    
+    numberLikes++
+  // var newPostCategory = getPostCategory.toLowerCase();
+  // newPostCategory = newPostCategory.replace(/\s/g, '');
+
+
  
   $("#num-likes-span" + getPostID).text(numberLikes);
   console.log("#num-likes-span" + getPostID);

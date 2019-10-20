@@ -35,7 +35,7 @@ nav{
     font-weight: bolder;
 }
 
-#modal1-button {
+#create-post-btn-div {
     position: fixed;
     bottom: 40px; 
     right: 40px;
