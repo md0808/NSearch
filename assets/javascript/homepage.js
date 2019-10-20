@@ -54,7 +54,7 @@ $("#makeAPost-btn").on("click", function() {
 });
 
 
-//allows users to press enter as any entry only if text exists in forms
+//allows users to press enter in text area only if text has been entered
 $(".enter-rules").keypress(function (e) {
   if (e.which == '13' ) {
     checkTextAreas(areTextAreasFull);
@@ -62,7 +62,7 @@ $(".enter-rules").keypress(function (e) {
     if (areTextAreasFull == true){
       pushPostToDatabase();
 
-      $("#postReply-modal").modal("close");
+      $("#postReply-modal").modal.close()
       console.log("this modal should close")
       $("#post-username").val("");
       $("#post-title").val("");
@@ -150,9 +150,9 @@ $("#create-comment-btn").on("click", function() {
     if (areTextAreasFull == true){
       createNewComment();
       $("#postReply-modal").modal("close");
-      $("#post-username").val("");
-      $("#post-title").val("");
-      $("#post-content").val("");
+      $("#comment-username").val("");
+      $("#comment-title").val("");
+      $("#comment-content").val("");
 
   } else {
     $("#text-check-modal").modal("open");
@@ -407,7 +407,7 @@ function showComments(){
 
     for(var i = 0; i < seperatedComments.length; i++){
       if(seperatedComments[i] !== ""){ 
-        var newComment = $("<h5>" +seperatedComments[i].replace(/[{()}]/g, '') + "</h5>")
+        var newComment = $("<p>" +seperatedComments[i].replace(/[{()}]/g, '') + "</p>")
         $("#comments-" + getPostID).append(newComment);
 
       }
