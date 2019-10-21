@@ -108,7 +108,7 @@ $(".enter-rules").keypress(function (e) {
     if (areTextAreasFull == true) {
       pushPostToDatabase();
 
-      $("#postReply-modal").modal.close()
+      $("#createAPost-modal").modal.close()
       console.log("this modal should close")
       $("#post-username").val("");
       $("#post-title").val("");
@@ -165,7 +165,7 @@ $(".enter-rules-comments").keypress(function (e) {
     checkTextAreasComments(areTextAreasFull);
     if (areTextAreasFull == true) {
       createNewComment();
-      $("#createAPost-modal").modal("close");
+      $("#postReply-modal").modal("close");
       console.log("this modal should  also close")
 
       $("#comment-username").val("");
