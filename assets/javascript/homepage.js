@@ -28,23 +28,65 @@ var videoGamesPostsRef = "/posts/videogames";
 var areCommentsShowing = false;
 
 $(document).ready(function () {
-  $(".dropdown-trigger").dropdown();
-});
-
-$(document).ready(function () {
-  $("select").formSelect();
-});
-
-$(document).ready(function () {
   $(".tooltipped").tooltip();
+  $(".sidenav").sidenav();
+  $("select").formSelect();
+  $(".dropdown-trigger").dropdown();
+
+  database.ref("/posts").on("value", function (data) {
+
+    //movie posts
+    if(data.child("movies").exists()){
+      database.ref("/posts/movies").on("value", function(movieData){
+        movieData.forEach(function(child){
+          var newNumLikes = 0;
+          var newPost_ID = child.val().postid;
+          
+          database.ref("/posts/movies/" + newPost_ID + "/likes").on("value", function(likesData){
+            newNumLikes = likesData.val().numLikes;
+          })
+
+          $("#num-likes-span" + newPost_ID).text(newNumLikes);
+        })
+      }) 
+    }
+
+    //music posts
+    if(data.child("music").exists()){
+      database.ref("/posts/music").on("value", function(movieData){
+        movieData.forEach(function(child){
+          var newNumLikes = 0;
+          var newPost_ID = child.val().postid;
+          
+          database.ref("/posts/music/" + newPost_ID + "/likes").on("value", function(likesData){
+            newNumLikes = likesData.val().numLikes;
+          })
+
+          $("#num-likes-span" + newPost_ID).text(newNumLikes);
+        })
+      }) 
+    }
+
+    //videogames
+    if(data.child("videogames").exists()){
+      database.ref("/posts/videogames").on("value", function(movieData){
+        movieData.forEach(function(child){
+          var newNumLikes = 0;
+          var newPost_ID = child.val().postid;
+          
+          database.ref("/posts/videogames/" + newPost_ID + "/likes").on("value", function(likesData){
+            newNumLikes = likesData.val().numLikes;
+          })
+
+          $("#num-likes-span" + newPost_ID).text(newNumLikes);
+        })
+      }) 
+    }
+  })
 });
 
 $(".brand-logo").on("click", function () {
   location.reload();
-});
-
-$(document).ready(function(){
-  $(".sidenav").sidenav();
 });
 
 $(".modal").modal();
@@ -53,17 +95,17 @@ $(".modal").modal();
 var areTextAreasFull = false;
 
 
-$("#makeAPost-btn").on("click", function() {
+$("#makeAPost-btn").on("click", function () {
   $("#createAPost-modal").modal("open");
 });
 
 
 //allows users to press enter in text area only if text has been entered
 $(".enter-rules").keypress(function (e) {
-  if (e.which == '13' ) {
+  if (e.which == '13') {
     checkTextAreas(areTextAreasFull);
-    
-    if (areTextAreasFull == true){
+
+    if (areTextAreasFull == true) {
       pushPostToDatabase();
 
       $("#postReply-modal").modal.close()
@@ -78,32 +120,32 @@ $(".enter-rules").keypress(function (e) {
   }
 });
 
-function checkTextAreas () {
+function checkTextAreas() {
   //gets values from input
-var textInput1= $("#post-username").val().trim();
-var textInput2= $("#post-title").val().trim();
-var textInput3= $("#post-content").val().trim();
+  var textInput1 = $("#post-username").val().trim();
+  var textInput2 = $("#post-title").val().trim();
+  var textInput3 = $("#post-content").val().trim();
   //checks to make sure the inputs have some text
-if (textInput1.trim().length == 0 
-    || textInput2.trim().length == 0 
-    || textInput3.trim().length == 0){
+  if (textInput1.trim().length == 0
+    || textInput2.trim().length == 0
+    || textInput3.trim().length == 0) {
     areTextAreasFull = false;
     $("#text-check-modal").modal("open");
-} else {
-  areTextAreasFull = true;
-}
+  } else {
+    areTextAreasFull = true;
+  }
 }
 
 
-$("#push-to-database").on("click", function() {
-  checkTextAreas ()
-    if (areTextAreasFull == true){
-      pushPostToDatabase();
-      $("#createAPost-modal").modal("close");
-      console.log("this modal should close")
-      $("#post-username").val("");
-      $("#post-title").val("");
-      $("#post-content").val("");
+$("#push-to-database").on("click", function () {
+  checkTextAreas()
+  if (areTextAreasFull == true) {
+    pushPostToDatabase();
+    $("#createAPost-modal").modal("close");
+    console.log("this modal should close")
+    $("#post-username").val("");
+    $("#post-title").val("");
+    $("#post-content").val("");
 
   } else {
     $("#text-check-modal").modal("open");
@@ -111,52 +153,52 @@ $("#push-to-database").on("click", function() {
 });
 
 
-$(".reply-modal-btn").on("click", function() {
+$(".reply-modal-btn").on("click", function () {
   $("#postReply-modal").modal("open");
 });
 
 
 //regulates enter key on the comment modal
 $(".enter-rules-comments").keypress(function (e) {
-  if (e.which == '13' ) {
+  if (e.which == '13') {
     console.log("enter was pressed")
     checkTextAreasComments(areTextAreasFull);
-      if (areTextAreasFull == true){
-        createNewComment();
-        $("#createAPost-modal").modal("close");
-        console.log("this modal should  also close")
+    if (areTextAreasFull == true) {
+      createNewComment();
+      $("#createAPost-modal").modal("close");
+      console.log("this modal should  also close")
 
-        $("#comment-username").val("");
-        $("#comment-content").val("");
+      $("#comment-username").val("");
+      $("#comment-content").val("");
 
-      } else {
-        $("#text-check-modal").modal("open");
-      }
+    } else {
+      $("#text-check-modal").modal("open");
+    }
   }
 });
 
-function checkTextAreasComments () {
+function checkTextAreasComments() {
   //gets values from inputs for reply modal
-  var textInput1= $("#comment-username").val().trim();
-  var textInput2= $("#comment-content").val().trim();
+  var textInput1 = $("#comment-username").val().trim();
+  var textInput2 = $("#comment-content").val().trim();
   //checks to make sure the inputs have some text
-  if (textInput1.trim().length == 0 || 
-      textInput2.trim().length == 0 ){
-        areTextAreasFull = false;
-        $("#text-check-modal").modal("open");
+  if (textInput1.trim().length == 0 ||
+    textInput2.trim().length == 0) {
+    areTextAreasFull = false;
+    $("#text-check-modal").modal("open");
   } else {
     areTextAreasFull = true;
   }
 }
 
-$("#create-comment-btn").on("click", function() {
-  checkTextAreasComments ()
-    if (areTextAreasFull == true){
-      createNewComment();
-      $("#postReply-modal").modal("close");
-      $("#comment-username").val("");
-      $("#comment-title").val("");
-      $("#comment-content").val("");
+$("#create-comment-btn").on("click", function () {
+  checkTextAreasComments()
+  if (areTextAreasFull == true) {
+    createNewComment();
+    $("#postReply-modal").modal("close");
+    $("#comment-username").val("");
+    $("#comment-title").val("");
+    $("#comment-content").val("");
 
   } else {
     $("#text-check-modal").modal("open");
@@ -247,6 +289,7 @@ function pushPostToDatabase() {
     allComments: ""
   });
 
+  console.log("likes set in pushToDB Func");
   database.ref(likesRef).set({
     numLikes: 0
   })
@@ -264,27 +307,27 @@ function showPostUI(data) {
 
   var newPost = $(
     "<div class='card indigo darken-1'>" +
-      "<div class='card-content white-text'>" +
-        "<div class='card-header'>" +
-          "<a href='#'><span>" +
-            newPost_Username +
-          "</span></a></br>" +
-          "<a href='#'><span>" +
-            newPost_Category +
-          "</span></a>" +
-          "<hr>" +
-        "</div>" +
-      "<span class='card-title'>" +
-      "<h5 class='center-align'>" +
-        newPost_Title +
-      "</h5>" +
-      "</span>" +
-      "<p>" +
-        newPost_Content +
-      "</p>" +
-      "</div>" +
+    "<div class='card-content white-text'>" +
+    "<div class='card-header'>" +
+    "<a href='#'><span>" +
+    newPost_Username +
+    "</span></a></br>" +
+    "<a href='#'><span>" +
+    newPost_Category +
+    "</span></a>" +
+    "<hr>" +
+    "</div>" +
+    "<span class='card-title'>" +
+    "<h5 class='center-align'>" +
+    newPost_Title +
+    "</h5>" +
+    "</span>" +
+    "<p>" +
+    newPost_Content +
+    "</p>" +
+    "</div>" +
     "<div class='card-action'>" +
-    "<span class='num-favories' id='num-likes-span" + newPost_ID + "'>0</span> &nbsp; <a href='#'><i id='like-button-" + newPost_ID + "' data-postID='" + newPost_ID +  "' data-postCategory ='" + newPost_Category + "' class='tiny material-icons'>favorite" +
+    "<span class='num-favories' id='num-likes-span" + newPost_ID + "'>0</span> &nbsp; <a><i id='like-button-" + newPost_ID + "' data-postID='" + newPost_ID + "' data-postCategory ='" + newPost_Category + "' class='tiny material-icons'>favorite" +
     "</i></a>" +
     "<a id='reply-modal-btn' class='reply-modal-btn' href='#postReply-modal' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>Comment</a>" +
     "<a href='#' id='view-reply-btn' class='view-replies' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>View Comments </a>" +
@@ -319,7 +362,7 @@ function showPostUI(data) {
 
   $("#view-reply-btn").on("click", function () {
 
-    if (areCommentsShowing == false){
+    if (areCommentsShowing == false) {
       getPostID = $(this).attr("data-postid");
       getPostCategory = $(this).attr("data-postCategory");
       $("#comments-" + getPostID).show();
@@ -334,44 +377,37 @@ function showPostUI(data) {
       $("#comments-" + getPostID).hide();
       $("#comments-" + getPostID).text("")
     }
-    
+
   });
 
-  $("#like-button-" + newPost_ID).on("click", function(){
-    getPostID =$(this).attr("data-postid");
-    getPostCategory= $(this).attr("data-postCategory");
+  $("#like-button-" + newPost_ID).on("click", function () {
+    getPostID = $(this).attr("data-postid");
+    getPostCategory = $(this).attr("data-postCategory");
     addLike();
 
   })
 }
-var newPostCategory = getPostCategory.toLowerCase();
-newPostCategory = newPostCategory.replace(/\s/g, '');
-var newLikeRef = "/posts/" + newPostCategory + "/" + getPostID + "/likes";
 
-var numberLikes = 0;
-  database.ref(newLikeRef).on("value", function(data) {
+function addLike() {
+  var newPostCategory = getPostCategory.toLowerCase();
+  newPostCategory = newPostCategory.replace(/\s/g, '');
+  var newLikeRef = "/posts/" + newPostCategory + "/" + getPostID + "/likes";
+
+  var numberLikes = 0;
+  database.ref(newLikeRef).on("value", function (data) {
     numberLikes = data.val().numLikes;
   })
+
+    numberLikes++
+
   database.ref(newLikeRef).set({
     numLikes: numberLikes
   });
-  function addLike() {
-    
-    numberLikes++
-  // var newPostCategory = getPostCategory.toLowerCase();
-  // newPostCategory = newPostCategory.replace(/\s/g, '');
 
-
- 
   $("#num-likes-span" + getPostID).text(numberLikes);
-  console.log("#num-likes-span" + getPostID);
-
 }
 
-
 function createNewComment() {
-  console.log("create a comment on: " + getPostID);
-
   var comment_username = $("#comment-username").val().trim();
   var comment = $("#comment-content").val().trim();
 
@@ -379,12 +415,11 @@ function createNewComment() {
 
   var get_allComments = "";
   var newComment = "{" + comment_username + ": " + comment + "},";
-  console.log(newComment);
 
   postCategory = postCategory.replace(/\s/g, '');
   var postCommentRef = "/posts/" + postCategory + "/" + getPostID + "/" + "comments";
 
-  database.ref(postCommentRef).on("value", function(data) {
+  database.ref(postCommentRef).on("value", function (data) {
     get_allComments = data.val().allComments
   });
 
@@ -393,7 +428,7 @@ function createNewComment() {
   })
 }
 
-function showComments(){
+function showComments() {
   var newPostCategory = getPostCategory.toLowerCase();
   newPostCategory = newPostCategory.replace(/\s/g, '');
 
@@ -402,16 +437,16 @@ function showComments(){
   var postComments = "";
   var seperatedComments = [];
 
-  database.ref(newPostRef).on("value", function(data){
+  database.ref(newPostRef).on("value", function (data) {
     postComments = data.val().allComments;
     $("#comments-" + getPostID).text("")
 
 
     seperatedComments = postComments.split(',');
 
-    for(var i = 0; i < seperatedComments.length; i++){
-      if(seperatedComments[i] !== ""){ 
-        var newComment = $("<p>" +seperatedComments[i].replace(/[{()}]/g, '') + "</p>")
+    for (var i = 0; i < seperatedComments.length; i++) {
+      if (seperatedComments[i] !== "") {
+        var newComment = $("<p>" + seperatedComments[i].replace(/[{()}]/g, '') + "</p>")
         $("#comments-" + getPostID).append(newComment);
 
       }
@@ -428,22 +463,19 @@ function musicSort() {
     snapshot.forEach(function (childSnapshot) {
       // title of each instance of music
       var key = childSnapshot.key;
-      console.log(key);
 
       // data within each instance
       var childData = childSnapshot;
-      console.log(childData.val());
 
       showPostUI(childData, key);
     });
   });
 }
-  
-$(".music-button").click(function() {
+
+$(".music-button").click(function () {
   $("#mainContent").hide();
   $("#music-activity-div").show();
   $("#category-name").text("Music");
-  console.log("Music button pushed.");
 
   musicSort();
 });
@@ -456,53 +488,47 @@ function videogamesSort() {
     snapshot.forEach(function (childSnapshot) {
       // title of each instance of books
       var key = childSnapshot.key;
-      console.log(key);
 
       // data within each instance
       var childData = childSnapshot;
-      console.log(childData.val());
 
       showPostUI(childData, key);
     });
   });
 }
 
-$(".videogames-button").click(function() {
+$(".videogames-button").click(function () {
   $("#mainContent").hide();
   $("#videogames-activity-div").show();
   $("#category-name").text("Video Games");
-  console.log("video games button pushed.");
   videogamesSort();
 });
 
 function moviesSort() {
   // sort through firebase for movies category posts / list
   var query = firebase.database().ref("/posts/movies");
-  query.once("value").then(function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
+  query.once("value").then(function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
       // title of each instance of movies
       var key = childSnapshot.key;
-      console.log(key);
 
       // data within each instance
       var childData = childSnapshot;
-      console.log(childData.val());
 
       showPostUI(childData, key);
     });
   });
 }
 
-$(".movies-button").click(function() {
+$(".movies-button").click(function () {
   $("#mainContent").hide();
   $("#movies-activity-div").show();
-  console.log("movies button pushed.");
   $("#category-name").text("Movies");
   moviesSort();
 });
 
 // javascript for materialize api button
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('.fixed-action-btn');
   var instances = M.FloatingActionButton.init(elems, {
     direction: 'left'
