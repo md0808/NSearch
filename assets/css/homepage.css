@@ -130,6 +130,7 @@ label:active {
 .musicApiDiv{
     border: #005DAB solid 2px;
     height: 200px;
+    overflow: scroll;
 }
 
 .minorSpacing {
@@ -146,6 +147,7 @@ label:active {
 .moviesApiDiv {
     border: #005DAB solid 2px;
     height: 400px;
+    overflow: scroll;
 }
 
 .gamingHeader {
