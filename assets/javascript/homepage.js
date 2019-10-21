@@ -43,6 +43,10 @@ $(".brand-logo").on("click", function () {
   location.reload();
 });
 
+$(document).ready(function(){
+  $(".sidenav").sidenav();
+});
+
 $(".modal").modal();
 
 //variable to text if user has entered text into forms
