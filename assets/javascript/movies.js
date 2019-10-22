@@ -12,7 +12,7 @@ $("#gamingApi").click(function() {
   $(".hiddenDiv").html(
     $(
       "<div class='moviesApiDiv'>" +
-        "<h5 class='gamingHeader center-align'>Looking for Something to Watch?</h5>" +
+        "<h5 class='gamingHeader center-align'>Find a Movie</h5>" +
         "<div class='musicApiSearch col s6'>" +
         "<h5 class='center-align'>Title</h5>" +
         "<input id='titleSearch' type='text' placeholder='21 Jump Street'>" +
