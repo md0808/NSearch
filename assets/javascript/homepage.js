@@ -27,6 +27,10 @@ var videoGamesPostsRef = "/posts/videogames";
 
 var areCommentsShowing = false;
 
+var mostLikedPostRef = "";
+var mostLikedPostID = "";
+var mostLikedPostNum = 0;
+
 $(document).ready(function () {
   $(".tooltipped").tooltip();
   $(".sidenav").sidenav();
@@ -46,6 +50,12 @@ $(document).ready(function () {
             newNumLikes = likesData.val().numLikes;
           })
 
+          if(newNumLikes > mostLikedPostNum){
+            mostLikedPostRef = "/posts/movies/" + newPost_ID;
+            mostLikedPostID = newPost_ID;
+            mostLikedPostNum = newNumLikes;
+          } 
+
           $("#num-likes-span" + newPost_ID).text(newNumLikes);
         })
       }) 
@@ -61,6 +71,12 @@ $(document).ready(function () {
           database.ref("/posts/music/" + newPost_ID + "/likes").on("value", function(likesData){
             newNumLikes = likesData.val().numLikes;
           })
+
+          if(newNumLikes > mostLikedPostNum){
+            mostLikedPostRef = "/posts/music/" + newPost_ID;
+            mostLikedPostID = newPost_ID;
+            mostLikedPostNum = newNumLikes;
+          } 
 
           $("#num-likes-span" + newPost_ID).text(newNumLikes);
         })
@@ -78,10 +94,20 @@ $(document).ready(function () {
             newNumLikes = likesData.val().numLikes;
           })
 
+          if(newNumLikes > mostLikedPostNum){
+            mostLikedPostRef = "/posts/videogames/" + newPost_ID;
+            mostLikedPostID = newPost_ID;
+            mostLikedPostNum = newNumLikes;
+          } 
+
           $("#num-likes-span" + newPost_ID).text(newNumLikes);
         })
       }) 
     }
+
+    database.ref(mostLikedPostRef).on("value", function(data){
+      showPostUI(data, "whatshot-activity-div");
+    })
   })
 });
 
@@ -89,6 +115,7 @@ $(".brand-logo").on("click", function () {
   // location.reload();
   $("#mainContent").show();
   hideActivityDiv("none");
+  $("#category-name").text("The Latest Posts")
 });
 
 $(".modal").modal();
@@ -104,6 +131,13 @@ $("#makeAPost-btn").on("click", function () {
 $(".reply-modal-btn").on("click", function () {
   $("#postReply-modal").modal("open");
 });
+
+$("#whats-hot-btn").on("click", function(){
+  $("#mainContent").empty();
+  hideActivityDiv("whatshot-activity-div");
+
+  $("#num-likes-span" + mostLikedPostID).text(mostLikedPostNum);
+})
 
 
 //allows users to press enter in text area only if text has been entered
@@ -262,7 +296,6 @@ function pushPostToDatabase() {
     allComments: ""
   });
 
-  console.log("likes set in pushToDB Func");
   database.ref(likesRef).set({
     numLikes: 0
   })
@@ -310,28 +343,12 @@ function showPostUI(data, DivToPrepend) {
     "</div>" +
     "</div>"
   );
-
-    // if(newPost_Category === "Movies"){
-    //   $("#movies-activity-div").prepen(newPost);
-    //   console.log("prepend to movies");
-    // }
-    // else if(newPost_Category === "Music"){
-    //   $("#music-activity-div").prepend(newPost);
-    //   console.log("prepend to music");
-    // }
-    // else if(newPost_Category === "Video Games"){
-    //   $("#videogames-activity-div").prepend(newPost);
-    //   console.log("prepend to video games");
-    // }
     
     if(DivToPrepend !== "main"){
       $("#" + DivToPrepend).prepend(newPost)
-      console.log("prepend newcard to: #" + DivToPrepend)
-
     }
     else{
       $("#mainContent").prepend(newPost);
-      console.log("not main");
     }
 
   $(".reply-modal-btn").attr("onclick", onclickFunction);
@@ -498,7 +515,6 @@ function moviesSort() {
     snapshot.forEach(function (childSnapshot) {
       // title of each instance of movies
       var key = childSnapshot.key;
-      console.log(key);
 
       // data within each instance
       var childData = childSnapshot;
@@ -530,12 +546,14 @@ function clearActivityDivs(){
   $("#movies-activity-div").empty(); 
   $("#music-activity-div").empty(); 
   $("#videogames-activity-div").empty(); 
+  $("#whatshot-activity-div").empty();
 }
 
 function hideActivityDiv(divToShow){
   $("#movies-activity-div").hide(); 
   $("#music-activity-div").hide(); 
-  $("#videogames-activity-div").hide(); 
+  $("#videogames-activity-div").hide();
+  $("#whatshot-activity-div").hide();
 
   if(divToShow !== "none"){
     $("#" + divToShow).show(); 
