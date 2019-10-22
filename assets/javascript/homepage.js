@@ -101,24 +101,25 @@ $("#makeAPost-btn").on("click", function () {
   $("#createAPost-modal").modal("open");
 });
 
+$(".reply-modal-btn").on("click", function () {
+  $("#postReply-modal").modal("open");
+});
+
 
 //allows users to press enter in text area only if text has been entered
 $(".enter-rules").keypress(function (e) {
   if (e.which == '13') {
-    checkTextAreas(areTextAreasFull);
+    event.preventDefault();
+    return false;
+  }
+});
 
-    if (areTextAreasFull == true) {
-      pushPostToDatabase();
-
-      $("#createAPost-modal").modal.close()
-      console.log("this modal should close")
-      $("#post-username").val("");
-      $("#post-title").val("");
-      $("#post-content").val("");
-
-    } else {
-      $("#text-check-modal").modal("open");
-    }
+//regulates enter key on the comment modal
+$(".enter-rules-comments").keypress(function (e) {
+  if (e.which == '13') {
+     event.preventDefault();
+      return false;
+    
   }
 });
 
@@ -138,47 +139,6 @@ function checkTextAreas() {
   }
 }
 
-
-$("#push-to-database").on("click", function () {
-  checkTextAreas()
-  if (areTextAreasFull == true) {
-    pushPostToDatabase();
-    $("#createAPost-modal").modal("close");
-    console.log("this modal should close")
-    $("#post-username").val("");
-    $("#post-title").val("");
-    $("#post-content").val("");
-
-  } else {
-    $("#text-check-modal").modal("open");
-  }
-});
-
-
-$(".reply-modal-btn").on("click", function () {
-  $("#postReply-modal").modal("open");
-});
-
-
-//regulates enter key on the comment modal
-$(".enter-rules-comments").keypress(function (e) {
-  if (e.which == '13') {
-    console.log("enter was pressed")
-    checkTextAreasComments(areTextAreasFull);
-    if (areTextAreasFull == true) {
-      createNewComment();
-      $("#postReply-modal").modal("close");
-      console.log("this modal should  also close")
-
-      $("#comment-username").val("");
-      $("#comment-content").val("");
-
-    } else {
-      $("#text-check-modal").modal("open");
-    }
-  }
-});
-
 function checkTextAreasComments() {
   //gets values from inputs for reply modal
   var textInput1 = $("#comment-username").val().trim();
@@ -192,6 +152,22 @@ function checkTextAreasComments() {
     areTextAreasFull = true;
   }
 }
+
+$("#push-to-database").on("click", function () {
+  checkTextAreas()
+  if (areTextAreasFull == true) {
+    pushPostToDatabase();
+    $("#createAPost-modal").modal("close");
+    $("#post-username").val("");
+    $("#post-title").val("");
+    $("#post-content").val("");
+    
+
+  } else {
+    $("#text-check-modal").modal("open");
+  }
+});
+
 
 $("#create-comment-btn").on("click", function () {
   checkTextAreasComments()
