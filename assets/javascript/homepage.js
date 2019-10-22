@@ -86,7 +86,9 @@ $(document).ready(function () {
 });
 
 $(".brand-logo").on("click", function () {
-  location.reload();
+  // location.reload();
+  $("#mainContent").show();
+  hideActivityDiv("none");
 });
 
 $(".modal").modal();
@@ -182,25 +184,21 @@ $("#create-comment-btn").on("click", function () {
 });
 
 
-
 //Music
 database.ref(musicPostsRef).on("child_added", function (data) {
-  showPostUI(data);
+  showPostUI(data, "main");
 });
 
 //Video Games
 database.ref(videoGamesPostsRef).on("child_added", function (data) {
-  showPostUI(data);
+  showPostUI(data, "main");
 });
 
 //Movies
 database.ref(moviesPostsRef).on("child_added", function (data) {
-  showPostUI(data);
+  showPostUI(data, "main");
 });
-//Books
-database.ref(booksPostsRef).on("child_added", function (data) {
-  showPostUI(data);
-});
+
 
 //this is the function the pushes the post info the the correct db category
 function pushPostToDatabase() {
@@ -271,7 +269,7 @@ function pushPostToDatabase() {
 }
 
 
-function showPostUI(data) {
+function showPostUI(data, DivToPrepend) {
   var newPost_Username = data.val().postUsername;
   var newPost_Category = data.val().postCategory;
   var newPost_Title = data.val().postTitle;
@@ -305,7 +303,7 @@ function showPostUI(data) {
     "<span class='num-favories' id='num-likes-span" + newPost_ID + "'>0</span> &nbsp; <a><i id='like-button-" + newPost_ID + "' data-postID='" + newPost_ID + "' data-postCategory ='" + newPost_Category + "' class='tiny material-icons'>favorite" +
     "</i></a>" +
     "<a id='reply-modal-btn' class='reply-modal-btn' href='#postReply-modal' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>Comment</a>" +
-    "<a href='#' id='view-reply-btn' class='view-replies' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>View Comments </a>" +
+    "<a id='view-reply-btn' class='view-replies' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>View Comments </a>" +
     "</div>" +
     "<div class='comments-div' id='comments-" + newPost_ID + "'>" +
     "<p>dfsd</p>" +
@@ -313,19 +311,28 @@ function showPostUI(data) {
     "</div>"
   );
 
-  if (newPost_Category === "Movies") {
-    $("#movies-activity-div").prepend(newPost);
-    $("#mainContent").prepend(newPost);
-  } else if (newPost_Category === "Books") {
-    $("#books-activity-div").prepend(newPost);
-    $("#mainContent").prepend(newPost);
-  } else if (newPost_Category === "Music") {
-    $("#music-activity-div").prepend(newPost);
-    $("#mainContent").prepend(newPost);
-  } else if (newPost_Category === "Video Games") {
-    $("#videogames-activity-div").prepend(newPost);
-    $("#mainContent").prepend(newPost);
-  } else $("#mainContent").prepend(newPost);
+    // if(newPost_Category === "Movies"){
+    //   $("#movies-activity-div").prepen(newPost);
+    //   console.log("prepend to movies");
+    // }
+    // else if(newPost_Category === "Music"){
+    //   $("#music-activity-div").prepend(newPost);
+    //   console.log("prepend to music");
+    // }
+    // else if(newPost_Category === "Video Games"){
+    //   $("#videogames-activity-div").prepend(newPost);
+    //   console.log("prepend to video games");
+    // }
+    
+    if(DivToPrepend !== "main"){
+      $("#" + DivToPrepend).prepend(newPost)
+      console.log("prepend newcard to: #" + DivToPrepend)
+
+    }
+    else{
+      $("#mainContent").prepend(newPost);
+      console.log("not main");
+    }
 
   $(".reply-modal-btn").attr("onclick", onclickFunction);
 
@@ -442,7 +449,7 @@ function musicSort() {
       // data within each instance
       var childData = childSnapshot;
 
-      showPostUI(childData, key);
+      showPostUI(childData, "music-activity-div");
     });
   });
 }
@@ -452,6 +459,8 @@ $(".music-button").click(function () {
   $("#music-activity-div").show();
   $("#category-name").text("Music");
 
+  clearActivityDivs();
+  hideActivityDiv("music-activity-div")
   musicSort();
 });
 
@@ -467,7 +476,7 @@ function videogamesSort() {
       // data within each instance
       var childData = childSnapshot;
 
-      showPostUI(childData, key);
+      showPostUI(childData, "videogames-activity-div");
     });
   });
 }
@@ -476,6 +485,9 @@ $(".videogames-button").click(function () {
   $("#mainContent").hide();
   $("#videogames-activity-div").show();
   $("#category-name").text("Video Games");
+
+  clearActivityDivs();
+  hideActivityDiv("videogames-activity-div")
   videogamesSort();
 });
 
@@ -486,11 +498,12 @@ function moviesSort() {
     snapshot.forEach(function (childSnapshot) {
       // title of each instance of movies
       var key = childSnapshot.key;
+      console.log(key);
 
       // data within each instance
       var childData = childSnapshot;
 
-      showPostUI(childData, key);
+      showPostUI(childData, "movies-activity-div");
     });
   });
 }
@@ -499,6 +512,9 @@ $(".movies-button").click(function () {
   $("#mainContent").hide();
   $("#movies-activity-div").show();
   $("#category-name").text("Movies");
+
+  clearActivityDivs();
+  hideActivityDiv("movies-activity-div")
   moviesSort();
 });
 
@@ -509,3 +525,19 @@ document.addEventListener('DOMContentLoaded', function () {
     direction: 'left'
   });
 });
+
+function clearActivityDivs(){
+  $("#movies-activity-div").empty(); 
+  $("#music-activity-div").empty(); 
+  $("#videogames-activity-div").empty(); 
+}
+
+function hideActivityDiv(divToShow){
+  $("#movies-activity-div").hide(); 
+  $("#music-activity-div").hide(); 
+  $("#videogames-activity-div").hide(); 
+
+  if(divToShow !== "none"){
+    $("#" + divToShow).show(); 
+  }
+}
