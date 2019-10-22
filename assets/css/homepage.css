@@ -41,6 +41,9 @@ nav{
     right: 40px;
     z-index: 40;
 }
+.num-favorites {
+    background: none;
+}
 
 .card {
     margin-top: 20px;

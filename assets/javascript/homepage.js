@@ -300,7 +300,7 @@ function showPostUI(data, DivToPrepend) {
     "</p>" +
     "</div>" +
     "<div class='card-action'>" +
-    "<span class='num-favories' id='num-likes-span" + newPost_ID + "'>0</span> &nbsp; <a><i id='like-button-" + newPost_ID + "' data-postID='" + newPost_ID + "' data-postCategory ='" + newPost_Category + "' class='tiny material-icons'>favorite" +
+    "<span class='num-favorites' id='num-likes-span" + newPost_ID + "'>0</span> &nbsp; <a href='#' onclick='return false;'><i id='like-button-" + newPost_ID + "' data-postID='" + newPost_ID + "' data-postCategory ='" + newPost_Category + "' class='tiny material-icons'>favorite" +
     "</i></a>" +
     "<a id='reply-modal-btn' class='reply-modal-btn' href='#postReply-modal' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>Comment</a>" +
     "<a id='view-reply-btn' class='view-replies' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>View Comments </a>" +
