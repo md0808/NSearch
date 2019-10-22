@@ -31,6 +31,8 @@ var mostLikedPostRef = "";
 var mostLikedPostID = "";
 var mostLikedPostNum = 0;
 
+var likedPost = [];
+
 $(document).ready(function () {
   $(".tooltipped").tooltip();
   $(".sidenav").sidenav();
@@ -40,79 +42,76 @@ $(document).ready(function () {
   database.ref("/posts").on("value", function (data) {
 
     //movie posts
-    if(data.child("movies").exists()){
-      database.ref("/posts/movies").on("value", function(movieData){
-        movieData.forEach(function(child){
+    if (data.child("movies").exists()) {
+      database.ref("/posts/movies").on("value", function (movieData) {
+        movieData.forEach(function (child) {
           var newNumLikes = 0;
           var newPost_ID = child.val().postid;
-          
-          database.ref("/posts/movies/" + newPost_ID + "/likes").on("value", function(likesData){
+
+          database.ref("/posts/movies/" + newPost_ID + "/likes").on("value", function (likesData) {
             newNumLikes = likesData.val().numLikes;
           })
 
-          if(newNumLikes > mostLikedPostNum){
+          if (newNumLikes > mostLikedPostNum) {
             mostLikedPostRef = "/posts/movies/" + newPost_ID;
             mostLikedPostID = newPost_ID;
             mostLikedPostNum = newNumLikes;
-          } 
+          }
 
           $("#num-likes-span" + newPost_ID).text(newNumLikes);
         })
-      }) 
+      })
     }
 
     //music posts
-    if(data.child("music").exists()){
-      database.ref("/posts/music").on("value", function(movieData){
-        movieData.forEach(function(child){
+    if (data.child("music").exists()) {
+      database.ref("/posts/music").on("value", function (movieData) {
+        movieData.forEach(function (child) {
           var newNumLikes = 0;
           var newPost_ID = child.val().postid;
-          
-          database.ref("/posts/music/" + newPost_ID + "/likes").on("value", function(likesData){
+
+          database.ref("/posts/music/" + newPost_ID + "/likes").on("value", function (likesData) {
             newNumLikes = likesData.val().numLikes;
           })
 
-          if(newNumLikes > mostLikedPostNum){
+          if (newNumLikes > mostLikedPostNum) {
             mostLikedPostRef = "/posts/music/" + newPost_ID;
             mostLikedPostID = newPost_ID;
             mostLikedPostNum = newNumLikes;
-          } 
+          }
 
           $("#num-likes-span" + newPost_ID).text(newNumLikes);
         })
-      }) 
+      })
     }
 
     //videogames
-    if(data.child("videogames").exists()){
-      database.ref("/posts/videogames").on("value", function(movieData){
-        movieData.forEach(function(child){
+    if (data.child("videogames").exists()) {
+      database.ref("/posts/videogames").on("value", function (movieData) {
+        movieData.forEach(function (child) {
           var newNumLikes = 0;
           var newPost_ID = child.val().postid;
-          
-          database.ref("/posts/videogames/" + newPost_ID + "/likes").on("value", function(likesData){
+
+          database.ref("/posts/videogames/" + newPost_ID + "/likes").on("value", function (likesData) {
             newNumLikes = likesData.val().numLikes;
           })
 
-          if(newNumLikes > mostLikedPostNum){
+          if (newNumLikes > mostLikedPostNum) {
             mostLikedPostRef = "/posts/videogames/" + newPost_ID;
             mostLikedPostID = newPost_ID;
             mostLikedPostNum = newNumLikes;
-          } 
+          }
 
           $("#num-likes-span" + newPost_ID).text(newNumLikes);
         })
-      }) 
+      })
     }
-
-    database.ref(mostLikedPostRef).on("value", function(data){
-      showPostUI(data, "whatshot-activity-div");
-    })
   })
 });
 
 $(".brand-logo").on("click", function () {
   // location.reload();
+  $("#whatshot-activity-div").empty();
   $("#mainContent").show();
   hideActivityDiv("none");
   $("#category-name").text("The Latest Posts")
@@ -132,11 +131,21 @@ $(".reply-modal-btn").on("click", function () {
   $("#postReply-modal").modal("open");
 });
 
-$("#whats-hot-btn").on("click", function(){
+$("#whats-hot-btn").on("click", function () {
+  $("#mainContent").hide();
   $("#mainContent").empty();
+  $("#whatshot-activity-div").empty();
   hideActivityDiv("whatshot-activity-div");
+  $("#category-name").text("Top Liked Post");
+
+  database.ref(mostLikedPostRef).once("value").then(function (data) {
+    showPostUI(data, "whatshot-activity-div");
+  })
+
+  console.log("set new mostliked post @@");
 
   $("#num-likes-span" + mostLikedPostID).text(mostLikedPostNum);
+  console.log("#num-likes-span" + mostLikedPostID + ".text" + mostLikedPostNum);
 })
 
 
@@ -151,9 +160,9 @@ $(".enter-rules").keypress(function (e) {
 //regulates enter key on the comment modal
 $(".enter-rules-comments").keypress(function (e) {
   if (e.which == '13') {
-     event.preventDefault();
-      return false;
-    
+    event.preventDefault();
+    return false;
+
   }
 });
 
@@ -195,7 +204,7 @@ $("#push-to-database").on("click", function () {
     $("#post-username").val("");
     $("#post-title").val("");
     $("#post-content").val("");
-    
+
 
   } else {
     $("#text-check-modal").modal("open");
@@ -343,13 +352,14 @@ function showPostUI(data, DivToPrepend) {
     "</div>" +
     "</div>"
   );
-    
-    if(DivToPrepend !== "main"){
-      $("#" + DivToPrepend).prepend(newPost)
-    }
-    else{
-      $("#mainContent").prepend(newPost);
-    }
+
+  if (DivToPrepend !== "main") {
+    $("#" + DivToPrepend).prepend(newPost)
+    console.log("prepend to " + DivToPrepend);
+  }
+  else if (DivToPrepend !== "whatshot-activity-div") {
+    $("#mainContent").prepend(newPost);
+  }
 
   $(".reply-modal-btn").attr("onclick", onclickFunction);
 
@@ -382,28 +392,40 @@ function showPostUI(data, DivToPrepend) {
   $("#like-button-" + newPost_ID).on("click", function () {
     getPostID = $(this).attr("data-postid");
     getPostCategory = $(this).attr("data-postCategory");
+
+    console.log("like btn clicked");
     addLike();
 
+    likedPost.push(getPostID)
   })
 }
 
 function addLike() {
-  var newPostCategory = getPostCategory.toLowerCase();
-  newPostCategory = newPostCategory.replace(/\s/g, '');
-  var newLikeRef = "/posts/" + newPostCategory + "/" + getPostID + "/likes";
-
-  var numberLikes = 0;
-  database.ref(newLikeRef).on("value", function (data) {
-    numberLikes = data.val().numLikes;
-  })
-
-    numberLikes++
-
-  database.ref(newLikeRef).set({
-    numLikes: numberLikes
-  });
-
-  $("#num-likes-span" + getPostID).text(numberLikes);
+  if(likedPost.includes(getPostID) === false){
+    console.log("addlike running...");
+    var newPostCategory = getPostCategory.toLowerCase();
+    newPostCategory = newPostCategory.replace(/\s/g, '');
+    var newLikeRef = "/posts/" + newPostCategory + "/" + getPostID + "/likes";
+  
+    var numberLikes = 0;
+    database.ref(newLikeRef).on("value", function (data) {
+      numberLikes = data.val().numLikes;
+    })
+  
+    console.log("numberLikes:" + numberLikes);
+    console.log("numberLikes + 1 = " + (numberLikes + 1))
+  
+    numberLikes = numberLikes + 1;
+  
+    database.ref(newLikeRef).set({
+      numLikes: numberLikes
+    });
+  
+    $("#num-likes-span" + getPostID).text(numberLikes);
+  }
+  else{
+    console.log("already liked post");
+  }
 }
 
 function createNewComment() {
@@ -542,20 +564,20 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-function clearActivityDivs(){
-  $("#movies-activity-div").empty(); 
-  $("#music-activity-div").empty(); 
-  $("#videogames-activity-div").empty(); 
+function clearActivityDivs() {
+  $("#movies-activity-div").empty();
+  $("#music-activity-div").empty();
+  $("#videogames-activity-div").empty();
   $("#whatshot-activity-div").empty();
 }
 
-function hideActivityDiv(divToShow){
-  $("#movies-activity-div").hide(); 
-  $("#music-activity-div").hide(); 
+function hideActivityDiv(divToShow) {
+  $("#movies-activity-div").hide();
+  $("#music-activity-div").hide();
   $("#videogames-activity-div").hide();
   $("#whatshot-activity-div").hide();
 
-  if(divToShow !== "none"){
-    $("#" + divToShow).show(); 
+  if (divToShow !== "none") {
+    $("#" + divToShow).show();
   }
 }
