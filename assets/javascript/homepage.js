@@ -133,7 +133,6 @@ $(".reply-modal-btn").on("click", function () {
 
 $("#whats-hot-btn").on("click", function () {
   $("#mainContent").hide();
-  $("#mainContent").empty();
   $("#whatshot-activity-div").empty();
   hideActivityDiv("whatshot-activity-div");
   $("#category-name").text("Top Liked Post");
@@ -142,10 +141,6 @@ $("#whats-hot-btn").on("click", function () {
     showPostUI(data, "whatshot-activity-div");
   })
 
-  console.log("set new mostliked post @@");
-
-  $("#num-likes-span" + mostLikedPostID).text(mostLikedPostNum);
-  console.log("#num-likes-span" + mostLikedPostID + ".text" + mostLikedPostNum);
 })
 
 
@@ -320,42 +315,89 @@ function showPostUI(data, DivToPrepend) {
 
   var onclickFunction = "$('#postReply-modal').modal('open');";
 
-  var newPost = $(
-    "<div class='card indigo darken-1'>" +
-    "<div class='card-content white-text'>" +
-    "<div class='card-header'>" +
-    "<a href='#'><span>" +
-    newPost_Username +
-    "</span></a></br>" +
-    "<a href='#'><span>" +
-    newPost_Category +
-    "</span></a>" +
-    "<hr>" +
-    "</div>" +
-    "<span class='card-title'>" +
-    "<h5 class='center-align'>" +
-    newPost_Title +
-    "</h5>" +
-    "</span>" +
-    "<p>" +
-    newPost_Content +
-    "</p>" +
-    "</div>" +
-    "<div class='card-action'>" +
-    "<span class='num-favorites' id='num-likes-span" + newPost_ID + "'>0</span> &nbsp; <a href='#' onclick='return false;'><i id='like-button-" + newPost_ID + "' data-postID='" + newPost_ID + "' data-postCategory ='" + newPost_Category + "' class='tiny material-icons'>favorite" +
-    "</i></a>" +
-    "<a id='reply-modal-btn' class='reply-modal-btn' href='#postReply-modal' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>Comment</a>" +
-    "<a id='view-reply-btn' class='view-replies' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>View Comments </a>" +
-    "</div>" +
-    "<div class='comments-div' id='comments-" + newPost_ID + "'>" +
-    "<p>dfsd</p>" +
-    "</div>" +
-    "</div>"
-  );
+  var newPost = "";
+
+  if(DivToPrepend === "whatshot-activity-div"){
+    console.log("whatshot activity is chosen");
+    newPost = $(
+      "<div class='card indigo darken-1'>" +
+      "<div class='card-content white-text'>" +
+      "<div class='card-header'>" +
+      "<a href='#'><span>" +
+      newPost_Username +
+      "</span></a></br>" +
+      "<a href='#'><span>" +
+      newPost_Category +
+      "</span></a>" +
+      "<hr>" +
+      "</div>" +
+      "<span class='card-title'>" +
+      "<h5 class='center-align'>" +
+      newPost_Title +
+      "</h5>" +
+      "</span>" +
+      "<p>" +
+      newPost_Content +
+      "</p>" +
+      "</div>" +
+      "<div class='card-action'>" +
+      "<span class='num-favorites' id='num-likes-span-hot" + newPost_ID + "'>0</span> &nbsp; <a href='#' onclick='return false;'><i id='like-button-" + newPost_ID + "' data-postID='" + newPost_ID + "' data-postCategory ='" + newPost_Category + "' class='tiny material-icons'>favorite" +
+      "</i></a>" +
+      "<a id='reply-modal-btn' class='reply-modal-btn' href='#postReply-modal' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>Comment</a>" +
+      "<a id='view-reply-btn' class='view-replies' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>View Comments </a>" +
+      "</div>" +
+      "<div class='comments-div' id='comments-" + newPost_ID + "'>" +
+      "<p>dfsd</p>" +
+      "</div>" +
+      "</div>"
+    );
+  }
+  else{
+    console.log("not whatshot")
+    newPost = $(
+      "<div class='card indigo darken-1'>" +
+      "<div class='card-content white-text'>" +
+      "<div class='card-header'>" +
+      "<a href='#'><span>" +
+      newPost_Username +
+      "</span></a></br>" +
+      "<a href='#'><span>" +
+      newPost_Category +
+      "</span></a>" +
+      "<hr>" +
+      "</div>" +
+      "<span class='card-title'>" +
+      "<h5 class='center-align'>" +
+      newPost_Title +
+      "</h5>" +
+      "</span>" +
+      "<p>" +
+      newPost_Content +
+      "</p>" +
+      "</div>" +
+      "<div class='card-action'>" +
+      "<span class='num-favorites' id='num-likes-span" + newPost_ID + "'>0</span> &nbsp; <a href='#' onclick='return false;'><i id='like-button-" + newPost_ID + "' data-postID='" + newPost_ID + "' data-postCategory ='" + newPost_Category + "' class='tiny material-icons'>favorite" +
+      "</i></a>" +
+      "<a id='reply-modal-btn' class='reply-modal-btn' href='#postReply-modal' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>Comment</a>" +
+      "<a id='view-reply-btn' class='view-replies' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>View Comments </a>" +
+      "</div>" +
+      "<div class='comments-div' id='comments-" + newPost_ID + "'>" +
+      "<p>dfsd</p>" +
+      "</div>" +
+      "</div>"
+    );
+  }
 
   if (DivToPrepend !== "main") {
     $("#" + DivToPrepend).prepend(newPost)
     console.log("prepend to " + DivToPrepend);
+
+    if(DivToPrepend === "whatshot-activity-div"){
+      $("#num-likes-span-hot" + mostLikedPostID).text(mostLikedPostNum);
+
+      console.log("set new mostliked post @@");
+      console.log("#num-likes-span" + mostLikedPostID + ".text" +  "(" + mostLikedPostNum + ")");
+    }
   }
   else if (DivToPrepend !== "whatshot-activity-div") {
     $("#mainContent").prepend(newPost);
