@@ -133,7 +133,6 @@ $(".reply-modal-btn").on("click", function () {
 
 $("#whats-hot-btn").on("click", function () {
   $("#mainContent").hide();
-  $("#mainContent").empty();
   $("#whatshot-activity-div").empty();
   hideActivityDiv("whatshot-activity-div");
   $("#category-name").text("Top Liked Post");
