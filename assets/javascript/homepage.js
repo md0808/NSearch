@@ -379,7 +379,7 @@ function showPostUI(data, DivToPrepend) {
       "<span class='num-favorites' id='num-likes-span" + newPost_ID + "'>0</span> &nbsp; <a href='#' onclick='return false;'><i id='like-button-" + newPost_ID + "' data-postID='" + newPost_ID + "' data-postCategory ='" + newPost_Category + "' class='tiny material-icons'>favorite" +
       "</i></a>" +
       "<a id='reply-modal-btn' class='reply-modal-btn' href='#postReply-modal' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>Comment</a>" +
-      "<a id='view-reply-btn' class='view-replies' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>View Comments </a>" +
+      "<a id='view-reply-btn" + newPost_ID + "' class='view-replies' data-postID='" + newPost_ID + "' data-postCategory='" + newPost_Category + "'>View Comments </a>" +
       "</div>" +
       "<div class='comments-div' id='comments-" + newPost_ID + "'>" +
       "<p>dfsd</p>" +
@@ -411,22 +411,42 @@ function showPostUI(data, DivToPrepend) {
   });
 
 
-  $("#view-reply-btn").on("click", function () {
+  $("#view-reply-btn" + newPost_ID).on("click", function () {
+    console.log("view-replies clicked")
+    var btnText = this.text.trim();
 
-    if (areCommentsShowing == false) {
+    console.log(btnText);
+
+    // if(btnText === "View Comments"){
+    //   console.log("change text to hide comments");
+    //   $("#" + this.id).text("Hide Comments");
+    // }
+    // else if(btnText === "Hide Comments"){
+    //   console.log("change text to view comments");
+    //   $("#" + this.id).text("View Comments");
+    // }
+
+    getPostID = $(this).attr("data-postid");
+    if (btnText === "View Comments") {
+      console.log("btn text is view comments");
       getPostID = $(this).attr("data-postid");
       getPostCategory = $(this).attr("data-postCategory");
       $("#comments-" + getPostID).show();
       showComments();
-      $("#view-reply-btn").text("Hide Comments");
+      $("#view-reply-btn"+ getPostID).text("Hide Comments");
       areCommentsShowing = true;
 
     }
-    else {
+    else if (btnText === "Hide Comments") {
+      console.log("BTN: " + btnText);
+      console.log("btn text is hide comments");
       areCommentsShowing = false;
-      $("#view-reply-btn").text("View Comments");
+      $("#view-reply-btn" + getPostID).text("View Comments");
       $("#comments-" + getPostID).hide();
       $("#comments-" + getPostID).text("")
+    }
+    else{
+      console.log("neither");
     }
 
   });
@@ -511,10 +531,8 @@ function showComments() {
       if (seperatedComments[i] !== "") {
         var newComment = $("<p>" + seperatedComments[i].replace(/[{()}]/g, '') + "</p>")
         $("#comments-" + getPostID).append(newComment);
-
       }
     }
-
   })
 }
 
