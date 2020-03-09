@@ -3,7 +3,8 @@ https://xkingalex.github.io/NSearch/
 
 
 ## Summary
-NSearch is a social Media platform for connecting people with common interests.
+NSearch is a social Media platform for connecting people with common interests. It allows users to leave comments asking for inspirations or suggestions for new movies, music, and videogames to seek out.
+
 
 <img width="1209" alt="Screen Shot 2020-01-14 at 2 37 53 PM" src="https://user-images.githubusercontent.com/51139840/76174243-24d10480-6174-11ea-9bd5-f0cc719bdd42.png">
 
